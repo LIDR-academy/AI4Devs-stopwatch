@@ -83,6 +83,8 @@ Vamos a representar la cuenta atrás con un disco de vinilo y el cronómetro con
 
 # Prompt 5
 
-Creo que has cometido algún tipo de error en la forma de importar los archivos svg.
+Quiero que modifiques un poco los estilos en las pantallas de cronómetro y cuenta atrás.
 
-Cuando inspecciono en el navegador el div `home-option-icon` veo que contiene el archivo
+Ahora mismo los iconos del vinilo y el cassete están dentro de de `.timer-container`. Quiero que estén por detrás y que ocupen todo el tamaño de la pantalla en estas secciones.
+
+Intenta modificar el html lo menos posible para conseguirlo. Sólo quiero que modifiques los tamaños y la posición del vinilo y el cassete.
