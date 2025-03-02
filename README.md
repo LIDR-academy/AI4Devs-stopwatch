@@ -1,36 +1,106 @@
-# Stopwatch EN
+# Cronómetro y Cuenta Atrás Retro
 
-Use what you’ve learned about prompt engineering to create a stopwatch and countdown.
+Una aplicación web con estilo retro 8-bit que incluye un cronómetro y una cuenta atrás.
 
-Reference: https://www.online-stopwatch.com/ (see res/stopwatch.png for design reference)
+## Características
 
-Do it using the seed index.html + script.js
+### Página de inicio
 
-Use a chatbot, like ChatGPT or Gemini, not a code assistant in an IDE like Copilot.
+- Interfaz dividida en dos secciones (horizontal en pantallas apaisadas y vertical en pantallas verticales)
+- Acceso al cronómetro (representado por un cassette animado)
+- Acceso a la cuenta atrás (representada por un disco de vinilo animado)
 
-Tip: if it allows image analysis, you can upload it to easily obtain a design similar to the reference.
+### Cronómetro
 
-To submit the exercise, make a pull request that includes not only the generated code but also, crucially, the prompt used in the file prompts.md. Also, add the prompt in the comment.
+- Muestra el tiempo transcurrido en horas, minutos y segundos
+- Visualización de décimas, centésimas y milésimas de segundo
+- Fondo con un cassette que se anima cuando el cronómetro está en marcha
+- Botón de inicio/pausa
+- Botón de limpiar/reiniciar
+- Botón para volver a la página de inicio
 
-To submit, make a pull request that includes a folder copied from the template, with the name stopwatch-initials (e.g., stopwatch-ARM). It should include not only the generated code but also, crucially, the prompt used and the chatbot used in prompts.md. If you’ve used more than one prompt until reaching a suitable solution, add them all in order. Also, include the final prompt in the pull request comment.
+### Cuenta atrás
 
-Good luck!
+- Muestra el tiempo restante en horas, minutos y segundos
+- Visualización de décimas, centésimas y milésimas de segundo
+- Fondo con un disco de vinilo que gira cuando la cuenta atrás está en marcha
+- Botones de tiempo predefinidos: 10s, 20s, 30s, 1min, 2min, 3min, 5min, 10min, 15min, 20min, 30min, 1h, 2h, 3h y 5h
+- Inicio automático al seleccionar un tiempo predefinido
+- Botón de pausa (aparece cuando la cuenta atrás está en marcha)
+- Botón de limpiar (disponible cuando la cuenta atrás está en pausa)
+- Botón para volver a la página de inicio
 
-# Stopwatch ES
+## Diseño
 
-Utiliza lo aprendido sobre prompt engineering para crear un **cronómetro y cuenta atrás**. 
+La aplicación tiene un diseño retro inspirado en los juegos de 8-bits, con una tipografía pixelada y colores vibrantes. Incluye elementos gráficos animados como un cassette para el cronómetro y un disco de vinilo para la cuenta atrás, que se animan cuando están en funcionamiento.
 
-Referencia: [https://www.online-stopwatch.com/](https://www.online-stopwatch.com/) (ver res/stopwatch.png, referencia de diseño)
+## Tecnologías utilizadas
 
-Hazlo apoyado en el seed `index.html` + `script.js`
+- JavaScript vanilla
+- CSS3
+- HTML5
+- SVG para gráficos vectoriales
+- Arquitectura Domain-Driven Design (DDD)
 
-Utiliza un chatbot, como ChatGPT o Gemini, no un asistente de código en IDE como Copilot.
+## Estructura del proyecto
 
-Tip: si permite el análisis de imágenes, puedes subirla para obtener fácilmente un diseño similar al de referencia.
+```
+src/
+├── domain/           # Modelos de dominio
+│   ├── Timer.js      # Modelo de dominio del cronómetro
+│   └── Countdown.js  # Modelo de dominio de la cuenta atrás
+├── application/      # Servicios de aplicación
+│   ├── TimerService.js      # Servicio para el cronómetro
+│   └── CountdownService.js  # Servicio para la cuenta atrás
+├── ui/               # Interfaz de usuario
+│   ├── components/   # Componentes reutilizables
+│   │   ├── Button.js
+│   │   ├── TimerDisplay.js
+│   │   └── CountdownDisplay.js
+│   ├── pages/        # Páginas de la aplicación
+│   │   ├── Home.js
+│   │   ├── Timer.js
+│   │   └── Countdown.js
+│   └── styles/       # Estilos CSS
+│       └── main.css
+└── index.js          # Punto de entrada de la aplicación
 
-Para entregar el ejercicio, haz un pull request que incluya no solo el código generado, sino también, fundamental, el prompt utilizado en el fichero prompts.md. Añade además el prompt en el comentario.
+public/
+├── images/           # Imágenes y gráficos
+│   ├── cassette.svg  # Gráfico vectorial del cassette
+│   └── vinyl.svg     # Gráfico vectorial del disco de vinilo
+└── fonts/            # Fuentes tipográficas
+    └── PressStart2P-Regular.ttf  # Fuente pixelada 8-bit
+```
 
+## Instalación
 
-Para entregar, haz una pull request que incluya una carpeta copiada de template, con el nombre `stopwatch-iniciales` (ejemplo `stopwatch-ARM`). Debe incluir no solo el código generado, sino también, fundamental, **el prompt utilizado y el chatbot utilizado** en `prompts.md`. Si has usado más de un prompt hasta llegar a una solución adecuada, añade todos en orden. Añade además el prompt final en el comentario del pull request.
+1. Clona este repositorio
 
-¡Éxitos!
+```bash
+git clone <url-del-repositorio>
+```
+
+2. Instala las dependencias
+
+```bash
+npm install
+```
+
+3. Inicia el servidor de desarrollo
+
+```bash
+npm start
+```
+
+4. Abre tu navegador en `http://localhost:1234`
+
+## Construcción para producción
+
+```bash
+npm run build
+```
+
+## Licencia
+
+ISC
