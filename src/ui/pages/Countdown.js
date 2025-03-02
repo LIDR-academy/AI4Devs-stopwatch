@@ -12,6 +12,62 @@ function Countdown() {
   const container = document.createElement("div");
   container.className = "countdown-container";
 
+  // Fondo con vinilo
+  const countdownBackground = document.createElement("div");
+  countdownBackground.className = "countdown-background";
+
+  // Cargar el SVG del vinilo directamente
+  countdownBackground.innerHTML = `
+    <svg width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+      <!-- Disco de vinilo -->
+      <g id="vinyl-disc">
+        <!-- Disco exterior -->
+        <circle cx="150" cy="150" r="140" fill="#111111" stroke="#000000" stroke-width="2"/>
+        
+        <!-- Surcos del disco -->
+        <circle cx="150" cy="150" r="130" fill="none" stroke="#222222" stroke-width="1"/>
+        <circle cx="150" cy="150" r="120" fill="none" stroke="#222222" stroke-width="1"/>
+        <circle cx="150" cy="150" r="110" fill="none" stroke="#222222" stroke-width="1"/>
+        <circle cx="150" cy="150" r="100" fill="none" stroke="#222222" stroke-width="1"/>
+        <circle cx="150" cy="150" r="90" fill="none" stroke="#222222" stroke-width="1"/>
+        <circle cx="150" cy="150" r="80" fill="none" stroke="#222222" stroke-width="1"/>
+        <circle cx="150" cy="150" r="70" fill="none" stroke="#222222" stroke-width="1"/>
+        <circle cx="150" cy="150" r="60" fill="none" stroke="#222222" stroke-width="1"/>
+        
+        <!-- Etiqueta central -->
+        <circle cx="150" cy="150" r="50" fill="#e76e55" stroke="#000000" stroke-width="1"/>
+        <circle cx="150" cy="150" r="20" fill="#111111" stroke="#000000" stroke-width="1"/>
+        
+        <!-- Texto en la etiqueta -->
+        <text x="150" y="140" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#ffffff">RETRO</text>
+        <text x="150" y="160" font-family="Arial" font-size="10" text-anchor="middle" fill="#ffffff">COUNTDOWN</text>
+        
+        <!-- Detalles adicionales -->
+        <circle cx="150" cy="150" r="5" fill="#000000"/>
+        
+        <!-- Reflejo para dar efecto brillante -->
+        <ellipse cx="120" cy="120" rx="60" ry="20" fill="rgba(255, 255, 255, 0.1)" transform="rotate(-30, 120, 120)"/>
+      </g>
+      
+      <style>
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+        #vinyl-disc {
+          transform-origin: 150px 150px;
+          animation: spin 10s linear infinite;
+          animation-play-state: paused;
+        }
+        .playing #vinyl-disc {
+          animation-play-state: running;
+        }
+      </style>
+    </svg>
+  `;
+
+  container.appendChild(countdownBackground);
+
   // Crear el display de la cuenta atrás
   const initialTime = countdownService.getFormattedTime();
   const display = CountdownDisplay({ time: initialTime });
@@ -29,6 +85,7 @@ function Countdown() {
         countdownService.pauseCountdown();
         // Ocultar el botón de pausa cuando se pausa la cuenta atrás
         pauseButton.style.display = "none";
+        container.classList.remove("running");
       }
     },
   });
@@ -49,6 +106,7 @@ function Countdown() {
         presetButtonsContainer.style.display = "flex";
         clearButton.style.display = "none";
         pauseButton.style.display = "none";
+        container.classList.remove("running");
       }
     },
   });
@@ -104,8 +162,12 @@ function Countdown() {
             presetButtonsContainer.style.display = "flex";
             clearButton.style.display = "none";
             pauseButton.style.display = "none";
+            container.classList.remove("running");
           }
         );
+
+        // Activar la animación del vinilo
+        container.classList.add("running");
       },
     });
 

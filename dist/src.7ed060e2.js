@@ -521,6 +521,14 @@ function Timer() {
   var container = document.createElement("div");
   container.className = "timer-container";
 
+  // Fondo con cassette
+  var timerBackground = document.createElement("div");
+  timerBackground.className = "timer-background";
+
+  // Cargar el SVG del cassette directamente
+  timerBackground.innerHTML = "\n    <svg width=\"300\" height=\"200\" viewBox=\"0 0 300 200\" xmlns=\"http://www.w3.org/2000/svg\">\n      <!-- Carcasa principal del cassette -->\n      <rect x=\"20\" y=\"30\" width=\"260\" height=\"140\" rx=\"10\" ry=\"10\" fill=\"#333333\" stroke=\"#000000\" stroke-width=\"2\"/>\n      \n      <!-- Etiqueta central -->\n      <rect x=\"40\" y=\"50\" width=\"220\" height=\"100\" rx=\"5\" ry=\"5\" fill=\"#e0e0e0\" stroke=\"#000000\" stroke-width=\"1\"/>\n      \n      <!-- Ventanas para ver la cinta -->\n      <rect x=\"60\" y=\"70\" width=\"60\" height=\"60\" rx=\"3\" ry=\"3\" fill=\"#222222\" stroke=\"#000000\" stroke-width=\"1\"/>\n      <rect x=\"180\" y=\"70\" width=\"60\" height=\"60\" rx=\"3\" ry=\"3\" fill=\"#222222\" stroke=\"#000000\" stroke-width=\"1\"/>\n      \n      <!-- Carretes (que girar\xE1n) -->\n      <g id=\"left-reel\">\n        <circle cx=\"90\" cy=\"100\" r=\"25\" fill=\"#111111\" stroke=\"#000000\" stroke-width=\"1\"/>\n        <circle cx=\"90\" cy=\"100\" r=\"10\" fill=\"#333333\" stroke=\"#000000\" stroke-width=\"1\"/>\n        <line x1=\"90\" y1=\"75\" x2=\"90\" y2=\"125\" stroke=\"#333333\" stroke-width=\"2\"/>\n        <line x1=\"65\" y1=\"100\" x2=\"115\" y2=\"100\" stroke=\"#333333\" stroke-width=\"2\"/>\n      </g>\n      \n      <g id=\"right-reel\">\n        <circle cx=\"210\" cy=\"100\" r=\"25\" fill=\"#111111\" stroke=\"#000000\" stroke-width=\"1\"/>\n        <circle cx=\"210\" cy=\"100\" r=\"10\" fill=\"#333333\" stroke=\"#000000\" stroke-width=\"1\"/>\n        <line x1=\"210\" y1=\"75\" x2=\"210\" y2=\"125\" stroke=\"#333333\" stroke-width=\"2\"/>\n        <line x1=\"185\" y1=\"100\" x2=\"235\" y2=\"100\" stroke=\"#333333\" stroke-width=\"2\"/>\n      </g>\n      \n      <!-- Agujeros para los engranajes -->\n      <circle cx=\"90\" cy=\"100\" r=\"5\" fill=\"#000000\"/>\n      <circle cx=\"210\" cy=\"100\" r=\"5\" fill=\"#000000\"/>\n      \n      <!-- Detalles adicionales -->\n      <rect x=\"130\" y=\"80\" width=\"40\" height=\"40\" rx=\"2\" ry=\"2\" fill=\"#cccccc\" stroke=\"#000000\" stroke-width=\"1\"/>\n      <text x=\"150\" y=\"105\" font-family=\"Arial\" font-size=\"12\" text-anchor=\"middle\" fill=\"#333333\">RETRO</text>\n      \n      <!-- Agujeros para los tornillos -->\n      <circle cx=\"40\" cy=\"50\" r=\"3\" fill=\"#666666\" stroke=\"#000000\" stroke-width=\"1\"/>\n      <circle cx=\"260\" cy=\"50\" r=\"3\" fill=\"#666666\" stroke=\"#000000\" stroke-width=\"1\"/>\n      <circle cx=\"40\" cy=\"150\" r=\"3\" fill=\"#666666\" stroke=\"#000000\" stroke-width=\"1\"/>\n      <circle cx=\"260\" cy=\"150\" r=\"3\" fill=\"#666666\" stroke=\"#000000\" stroke-width=\"1\"/>\n      \n      <style>\n        @keyframes spin {\n          0% { transform: rotate(0deg); }\n          100% { transform: rotate(360deg); }\n        }\n        #left-reel {\n          transform-origin: 90px 100px;\n          animation: spin 4s linear infinite;\n          animation-play-state: paused;\n        }\n        #right-reel {\n          transform-origin: 210px 100px;\n          animation: spin 4s linear infinite;\n          animation-play-state: paused;\n        }\n        .playing #left-reel, .playing #right-reel {\n          animation-play-state: running;\n        }\n      </style>\n    </svg>\n  ";
+  container.appendChild(timerBackground);
+
   // Crear el display del cronómetro
   var initialTime = timerService.getFormattedTime();
   var display = (0, _TimerDisplay.default)({
@@ -542,6 +550,7 @@ function Timer() {
         startPauseButton.className = "btn btn-start";
         clearRestartButton.textContent = "Clear";
         clearRestartButton.className = "btn btn-clear";
+        container.classList.remove("running");
       } else {
         timerService.startTimer(function (time) {
           display.updateTime(time);
@@ -550,6 +559,7 @@ function Timer() {
         startPauseButton.className = "btn btn-pause";
         clearRestartButton.textContent = "Restart";
         clearRestartButton.className = "btn btn-restart";
+        container.classList.add("running");
       }
     }
   });
@@ -566,6 +576,7 @@ function Timer() {
         // Limpiar cuando está pausado
         timerService.resetTimer();
         display.updateTime(timerService.getFormattedTime());
+        container.classList.remove("running");
       }
     }
   });
@@ -1002,6 +1013,14 @@ function Countdown() {
   var container = document.createElement("div");
   container.className = "countdown-container";
 
+  // Fondo con vinilo
+  var countdownBackground = document.createElement("div");
+  countdownBackground.className = "countdown-background";
+
+  // Cargar el SVG del vinilo directamente
+  countdownBackground.innerHTML = "\n    <svg width=\"300\" height=\"300\" viewBox=\"0 0 300 300\" xmlns=\"http://www.w3.org/2000/svg\">\n      <!-- Disco de vinilo -->\n      <g id=\"vinyl-disc\">\n        <!-- Disco exterior -->\n        <circle cx=\"150\" cy=\"150\" r=\"140\" fill=\"#111111\" stroke=\"#000000\" stroke-width=\"2\"/>\n        \n        <!-- Surcos del disco -->\n        <circle cx=\"150\" cy=\"150\" r=\"130\" fill=\"none\" stroke=\"#222222\" stroke-width=\"1\"/>\n        <circle cx=\"150\" cy=\"150\" r=\"120\" fill=\"none\" stroke=\"#222222\" stroke-width=\"1\"/>\n        <circle cx=\"150\" cy=\"150\" r=\"110\" fill=\"none\" stroke=\"#222222\" stroke-width=\"1\"/>\n        <circle cx=\"150\" cy=\"150\" r=\"100\" fill=\"none\" stroke=\"#222222\" stroke-width=\"1\"/>\n        <circle cx=\"150\" cy=\"150\" r=\"90\" fill=\"none\" stroke=\"#222222\" stroke-width=\"1\"/>\n        <circle cx=\"150\" cy=\"150\" r=\"80\" fill=\"none\" stroke=\"#222222\" stroke-width=\"1\"/>\n        <circle cx=\"150\" cy=\"150\" r=\"70\" fill=\"none\" stroke=\"#222222\" stroke-width=\"1\"/>\n        <circle cx=\"150\" cy=\"150\" r=\"60\" fill=\"none\" stroke=\"#222222\" stroke-width=\"1\"/>\n        \n        <!-- Etiqueta central -->\n        <circle cx=\"150\" cy=\"150\" r=\"50\" fill=\"#e76e55\" stroke=\"#000000\" stroke-width=\"1\"/>\n        <circle cx=\"150\" cy=\"150\" r=\"20\" fill=\"#111111\" stroke=\"#000000\" stroke-width=\"1\"/>\n        \n        <!-- Texto en la etiqueta -->\n        <text x=\"150\" y=\"140\" font-family=\"Arial\" font-size=\"14\" font-weight=\"bold\" text-anchor=\"middle\" fill=\"#ffffff\">RETRO</text>\n        <text x=\"150\" y=\"160\" font-family=\"Arial\" font-size=\"10\" text-anchor=\"middle\" fill=\"#ffffff\">COUNTDOWN</text>\n        \n        <!-- Detalles adicionales -->\n        <circle cx=\"150\" cy=\"150\" r=\"5\" fill=\"#000000\"/>\n        \n        <!-- Reflejo para dar efecto brillante -->\n        <ellipse cx=\"120\" cy=\"120\" rx=\"60\" ry=\"20\" fill=\"rgba(255, 255, 255, 0.1)\" transform=\"rotate(-30, 120, 120)\"/>\n      </g>\n      \n      <style>\n        @keyframes spin {\n          0% { transform: rotate(0deg); }\n          100% { transform: rotate(360deg); }\n        }\n        #vinyl-disc {\n          transform-origin: 150px 150px;\n          animation: spin 10s linear infinite;\n          animation-play-state: paused;\n        }\n        .playing #vinyl-disc {\n          animation-play-state: running;\n        }\n      </style>\n    </svg>\n  ";
+  container.appendChild(countdownBackground);
+
   // Crear el display de la cuenta atrás
   var initialTime = countdownService.getFormattedTime();
   var display = (0, _CountdownDisplay.default)({
@@ -1021,6 +1040,7 @@ function Countdown() {
         countdownService.pauseCountdown();
         // Ocultar el botón de pausa cuando se pausa la cuenta atrás
         pauseButton.style.display = "none";
+        container.classList.remove("running");
       }
     }
   });
@@ -1041,6 +1061,7 @@ function Countdown() {
         presetButtonsContainer.style.display = "flex";
         clearButton.style.display = "none";
         pauseButton.style.display = "none";
+        container.classList.remove("running");
       }
     }
   });
@@ -1123,7 +1144,11 @@ function Countdown() {
           presetButtonsContainer.style.display = "flex";
           clearButton.style.display = "none";
           pauseButton.style.display = "none";
+          container.classList.remove("running");
         });
+
+        // Activar la animación del vinilo
+        container.classList.add("running");
       }
     });
     presetButtonsContainer.appendChild(presetButton);
@@ -1178,8 +1203,18 @@ function Home() {
 
   // Opción de cronómetro
   var timerOption = document.createElement("div");
-  timerOption.className = "home-option";
-  timerOption.textContent = "CRONÓMETRO";
+  timerOption.className = "home-option home-option-timer";
+
+  // Icono de cassette
+  var timerIconContainer = document.createElement("div");
+  timerIconContainer.className = "home-option-icon";
+
+  // Cargar el SVG del cassette directamente
+  timerIconContainer.innerHTML = "\n    <svg width=\"300\" height=\"200\" viewBox=\"0 0 300 200\" xmlns=\"http://www.w3.org/2000/svg\">\n      <!-- Carcasa principal del cassette -->\n      <rect x=\"20\" y=\"30\" width=\"260\" height=\"140\" rx=\"10\" ry=\"10\" fill=\"#333333\" stroke=\"#000000\" stroke-width=\"2\"/>\n      \n      <!-- Etiqueta central -->\n      <rect x=\"40\" y=\"50\" width=\"220\" height=\"100\" rx=\"5\" ry=\"5\" fill=\"#e0e0e0\" stroke=\"#000000\" stroke-width=\"1\"/>\n      \n      <!-- Ventanas para ver la cinta -->\n      <rect x=\"60\" y=\"70\" width=\"60\" height=\"60\" rx=\"3\" ry=\"3\" fill=\"#222222\" stroke=\"#000000\" stroke-width=\"1\"/>\n      <rect x=\"180\" y=\"70\" width=\"60\" height=\"60\" rx=\"3\" ry=\"3\" fill=\"#222222\" stroke=\"#000000\" stroke-width=\"1\"/>\n      \n      <!-- Carretes (que girar\xE1n) -->\n      <g id=\"left-reel\">\n        <circle cx=\"90\" cy=\"100\" r=\"25\" fill=\"#111111\" stroke=\"#000000\" stroke-width=\"1\"/>\n        <circle cx=\"90\" cy=\"100\" r=\"10\" fill=\"#333333\" stroke=\"#000000\" stroke-width=\"1\"/>\n        <line x1=\"90\" y1=\"75\" x2=\"90\" y2=\"125\" stroke=\"#333333\" stroke-width=\"2\"/>\n        <line x1=\"65\" y1=\"100\" x2=\"115\" y2=\"100\" stroke=\"#333333\" stroke-width=\"2\"/>\n      </g>\n      \n      <g id=\"right-reel\">\n        <circle cx=\"210\" cy=\"100\" r=\"25\" fill=\"#111111\" stroke=\"#000000\" stroke-width=\"1\"/>\n        <circle cx=\"210\" cy=\"100\" r=\"10\" fill=\"#333333\" stroke=\"#000000\" stroke-width=\"1\"/>\n        <line x1=\"210\" y1=\"75\" x2=\"210\" y2=\"125\" stroke=\"#333333\" stroke-width=\"2\"/>\n        <line x1=\"185\" y1=\"100\" x2=\"235\" y2=\"100\" stroke=\"#333333\" stroke-width=\"2\"/>\n      </g>\n      \n      <!-- Agujeros para los engranajes -->\n      <circle cx=\"90\" cy=\"100\" r=\"5\" fill=\"#000000\"/>\n      <circle cx=\"210\" cy=\"100\" r=\"5\" fill=\"#000000\"/>\n      \n      <!-- Detalles adicionales -->\n      <rect x=\"130\" y=\"80\" width=\"40\" height=\"40\" rx=\"2\" ry=\"2\" fill=\"#cccccc\" stroke=\"#000000\" stroke-width=\"1\"/>\n      <text x=\"150\" y=\"105\" font-family=\"Arial\" font-size=\"12\" text-anchor=\"middle\" fill=\"#333333\">RETRO</text>\n      \n      <!-- Agujeros para los tornillos -->\n      <circle cx=\"40\" cy=\"50\" r=\"3\" fill=\"#666666\" stroke=\"#000000\" stroke-width=\"1\"/>\n      <circle cx=\"260\" cy=\"50\" r=\"3\" fill=\"#666666\" stroke=\"#000000\" stroke-width=\"1\"/>\n      <circle cx=\"40\" cy=\"150\" r=\"3\" fill=\"#666666\" stroke=\"#000000\" stroke-width=\"1\"/>\n      <circle cx=\"260\" cy=\"150\" r=\"3\" fill=\"#666666\" stroke=\"#000000\" stroke-width=\"1\"/>\n      \n      <style>\n        @keyframes spin {\n          0% { transform: rotate(0deg); }\n          100% { transform: rotate(360deg); }\n        }\n        #left-reel {\n          transform-origin: 90px 100px;\n          animation: spin 4s linear infinite;\n          animation-play-state: paused;\n        }\n        #right-reel {\n          transform-origin: 210px 100px;\n          animation: spin 4s linear infinite;\n          animation-play-state: paused;\n        }\n        .playing #left-reel, .playing #right-reel {\n          animation-play-state: running;\n        }\n      </style>\n    </svg>\n  ";
+  var timerText = document.createElement("div");
+  timerText.textContent = "CRONÓMETRO";
+  timerOption.appendChild(timerIconContainer);
+  timerOption.appendChild(timerText);
   timerOption.addEventListener("click", function () {
     var appContainer = document.getElementById("app");
     appContainer.innerHTML = "";
@@ -1188,8 +1223,18 @@ function Home() {
 
   // Opción de cuenta atrás
   var countdownOption = document.createElement("div");
-  countdownOption.className = "home-option";
-  countdownOption.textContent = "CUENTA ATRÁS";
+  countdownOption.className = "home-option home-option-countdown";
+
+  // Icono de vinilo
+  var countdownIconContainer = document.createElement("div");
+  countdownIconContainer.className = "home-option-icon";
+
+  // Cargar el SVG del vinilo directamente
+  countdownIconContainer.innerHTML = "\n    <svg width=\"300\" height=\"300\" viewBox=\"0 0 300 300\" xmlns=\"http://www.w3.org/2000/svg\">\n      <!-- Disco de vinilo -->\n      <g id=\"vinyl-disc\">\n        <!-- Disco exterior -->\n        <circle cx=\"150\" cy=\"150\" r=\"140\" fill=\"#111111\" stroke=\"#000000\" stroke-width=\"2\"/>\n        \n        <!-- Surcos del disco -->\n        <circle cx=\"150\" cy=\"150\" r=\"130\" fill=\"none\" stroke=\"#222222\" stroke-width=\"1\"/>\n        <circle cx=\"150\" cy=\"150\" r=\"120\" fill=\"none\" stroke=\"#222222\" stroke-width=\"1\"/>\n        <circle cx=\"150\" cy=\"150\" r=\"110\" fill=\"none\" stroke=\"#222222\" stroke-width=\"1\"/>\n        <circle cx=\"150\" cy=\"150\" r=\"100\" fill=\"none\" stroke=\"#222222\" stroke-width=\"1\"/>\n        <circle cx=\"150\" cy=\"150\" r=\"90\" fill=\"none\" stroke=\"#222222\" stroke-width=\"1\"/>\n        <circle cx=\"150\" cy=\"150\" r=\"80\" fill=\"none\" stroke=\"#222222\" stroke-width=\"1\"/>\n        <circle cx=\"150\" cy=\"150\" r=\"70\" fill=\"none\" stroke=\"#222222\" stroke-width=\"1\"/>\n        <circle cx=\"150\" cy=\"150\" r=\"60\" fill=\"none\" stroke=\"#222222\" stroke-width=\"1\"/>\n        \n        <!-- Etiqueta central -->\n        <circle cx=\"150\" cy=\"150\" r=\"50\" fill=\"#e76e55\" stroke=\"#000000\" stroke-width=\"1\"/>\n        <circle cx=\"150\" cy=\"150\" r=\"20\" fill=\"#111111\" stroke=\"#000000\" stroke-width=\"1\"/>\n        \n        <!-- Texto en la etiqueta -->\n        <text x=\"150\" y=\"140\" font-family=\"Arial\" font-size=\"14\" font-weight=\"bold\" text-anchor=\"middle\" fill=\"#ffffff\">RETRO</text>\n        <text x=\"150\" y=\"160\" font-family=\"Arial\" font-size=\"10\" text-anchor=\"middle\" fill=\"#ffffff\">COUNTDOWN</text>\n        \n        <!-- Detalles adicionales -->\n        <circle cx=\"150\" cy=\"150\" r=\"5\" fill=\"#000000\"/>\n        \n        <!-- Reflejo para dar efecto brillante -->\n        <ellipse cx=\"120\" cy=\"120\" rx=\"60\" ry=\"20\" fill=\"rgba(255, 255, 255, 0.1)\" transform=\"rotate(-30, 120, 120)\"/>\n      </g>\n      \n      <style>\n        @keyframes spin {\n          0% { transform: rotate(0deg); }\n          100% { transform: rotate(360deg); }\n        }\n        #vinyl-disc {\n          transform-origin: 150px 150px;\n          animation: spin 10s linear infinite;\n          animation-play-state: paused;\n        }\n        .playing #vinyl-disc {\n          animation-play-state: running;\n        }\n      </style>\n    </svg>\n  ";
+  var countdownText = document.createElement("div");
+  countdownText.textContent = "CUENTA ATRÁS";
+  countdownOption.appendChild(countdownIconContainer);
+  countdownOption.appendChild(countdownText);
   countdownOption.addEventListener("click", function () {
     var appContainer = document.getElementById("app");
     appContainer.innerHTML = "";
@@ -1251,7 +1296,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62855" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54665" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
