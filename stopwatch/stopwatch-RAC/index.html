@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch & Countdown Timer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #555;
+            transition: all 0.3s ease;
+        }
+        
+        .tab.active {
+            color: #007bff;
+            border-bottom: 3px solid #007bff;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .display {
+            font-size: 5rem;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #333;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        .countdown-setup {
+            margin-top: 20px;
+        }
+        
+        .countdown-setup input {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            width: 70px;
+            text-align: center;
+            margin: 0 5px;
+        }
+        
+        .countdown-setup label {
+            font-weight: bold;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="tabs">
+            <div class="tab active" data-tab="stopwatch">Stopwatch</div>
+            <div class="tab" data-tab="countdown">Countdown</div>
+        </div>
+        
+        <div class="tab-content active" id="stopwatch">
+            <div class="display" id="stopwatch-display">00:00:00</div>
+            <div class="controls">
+                <button id="start-stopwatch">Start</button>
+                <button id="pause-stopwatch" disabled>Pause</button>
+                <button id="reset-stopwatch">Reset</button>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="countdown">
+            <div class="display" id="countdown-display">00:00:00</div>
+            <div class="controls">
+                <button id="start-countdown">Start</button>
+                <button id="pause-countdown" disabled>Pause</button>
+                <button id="reset-countdown">Reset</button>
+            </div>
+            <div class="countdown-setup">
+                <label for="hours">Hours:</label>
+                <input type="number" id="hours" min="0" max="99" value="0">
+                
+                <label for="minutes">Minutes:</label>
+                <input type="number" id="minutes" min="0" max="59" value="0">
+                
+                <label for="seconds">Seconds:</label>
+                <input type="number" id="seconds" min="0" max="59" value="0">
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
