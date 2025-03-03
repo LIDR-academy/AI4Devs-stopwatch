@@ -97,12 +97,19 @@ function resetTimer() {
 }
 
 // -------------------- INTERVALOS --------------------
+
+let intervalCountdown, breakCountdown;
+let savedIntervalTime = 30000;
+let savedBreakTime = 30000;
+
 document.getElementById("interval-display").addEventListener("input", (e) => {
   intervalTime = parseTimeInput(e.target.innerText);
+  savedIntervalTime = intervalTime; // Guardamos el tiempo ingresado
 });
 
 document.getElementById("break-display").addEventListener("input", (e) => {
   breakTime = parseTimeInput(e.target.innerText);
+  savedBreakTime = breakTime; // Guardamos el tiempo ingresado
 });
 
 function startInterval() {
@@ -113,7 +120,8 @@ function startInterval() {
 }
 
 function runIntervalCycle() {
-  let intervalCountdown = setInterval(() => {
+  clearInterval(intervalCountdown);
+  intervalCountdown = setInterval(() => {
     if (intervalTime <= 0) {
       clearInterval(intervalCountdown);
       playSound();
@@ -129,7 +137,8 @@ function runIntervalCycle() {
 }
 
 function runBreakCycle() {
-  let breakCountdown = setInterval(() => {
+  clearInterval(breakCountdown);
+  breakCountdown = setInterval(() => {
     if (breakTime <= 0) {
       clearInterval(breakCountdown);
       playSound();
@@ -141,15 +150,34 @@ function runBreakCycle() {
   }, 1000);
 }
 
-function resetInterval() {
-  clearInterval(intervalos);
-  intervalTime = 30000;
-  breakTime = 30000;
+function pauseInterval() {
+  clearInterval(intervalCountdown);
+  clearInterval(breakCountdown);
   isIntervalRunning = false;
-  document.getElementById("interval-display").innerText = "00:30";
-  document.getElementById("break-display").innerText = "00:30";
 }
 
+function restartInterval() {
+  clearInterval(intervalCountdown);
+  clearInterval(breakCountdown);
+  intervalTime = savedIntervalTime; // Reinicia al tiempo guardado
+  breakTime = savedBreakTime; // Reinicia al tiempo guardado
+  document.getElementById("interval-display").innerText =
+    formatTime(intervalTime);
+  document.getElementById("break-display").innerText = formatTime(breakTime);
+  isIntervalRunning = false;
+}
+
+function resetInterval() {
+  clearInterval(intervalCountdown);
+  clearInterval(breakCountdown);
+  intervalTime = 30000;
+  breakTime = 30000;
+  savedIntervalTime = 30000;
+  savedBreakTime = 30000;
+  isIntervalRunning = false;
+  document.getElementById("interval-display").innerText = "00:00:30";
+  document.getElementById("break-display").innerText = "00:00:30";
+}
 // -------------------- UTILIDADES --------------------
 function formatTime(ms) {
   let date = new Date(ms);
@@ -162,7 +190,19 @@ function formatTime(ms) {
 
 function parseTimeInput(value) {
   let parts = value.split(":").map((num) => parseInt(num) || 0);
-  return (parts[0] * 3600 + parts[1] * 60 + parts[2]) * 1000;
+
+  if (parts.length === 1) {
+    // Si solo hay segundos
+    return parts[0] * 1000;
+  } else if (parts.length === 2) {
+    // Si hay minutos y segundos
+    return (parts[0] * 60 + parts[1]) * 1000;
+  } else if (parts.length === 3) {
+    // Si hay horas, minutos y segundos
+    return (parts[0] * 3600 + parts[1] * 60 + parts[2]) * 1000;
+  }
+
+  return 0; // Evitar NaN si la entrada es inválida
 }
 
 // -------------------- SONIDO --------------------
