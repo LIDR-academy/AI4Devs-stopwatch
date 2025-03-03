@@ -29,10 +29,29 @@ Incluye tres funcionalidades principales:
 - 🔔 **Sonido al finalizar cada ciclo y descanso**.
 - ⏸ **Pausar intervalo en cualquier momento**.
 - 🔄 **Reiniciar solo el contador sin borrar configuración**.
+- 🔁 **Ahora el ciclo de trabajo y descanso se repite automáticamente**.
 
 ---
 
 ## 📜 **Changelog - Historial de Mejoras**
+### 🔥 v2.2 - Corrección de errores en los Intervalos y optimización 🚀
+✅ **Corrección del error `Cannot redeclare block-scoped variable 'isIntervalRunning'`**:  
+   - Ahora la variable `isIntervalRunning` **solo se declara una vez** en todo el script.  
+   - Se eliminó cualquier intento de redeclaración dentro de funciones.  
+
+✅ **Eliminado el delay en la transición entre el ciclo y el descanso**:  
+   - Ahora, cuando finaliza el ciclo de trabajo, **el descanso comienza inmediatamente**.  
+
+✅ **Corrección en el reinicio automático del ciclo**:  
+   - Ahora, cuando finaliza el descanso, **el ciclo de trabajo se reinicia automáticamente** con el tiempo configurado.  
+   - Se repite en bucle hasta que el usuario lo detenga manualmente.  
+
+✅ **Optimización del código en `runIntervalCycle()` y `runBreakCycle()`**:  
+   - Se aseguraron valores consistentes en los contadores.  
+   - Se eliminó código redundante para una mejor eficiencia.  
+
+---
+
 ### 🔥 v2.1 - Corrección de errores y optimización 🚀
 ✅ **Corrección del formato en la entrada de tiempo en los Intervalos**:  
    - Ahora se pueden ingresar números sin necesidad de ceros (`4` en lugar de `04`).  
@@ -95,6 +114,7 @@ Incluye tres funcionalidades principales:
 3️⃣ **En el Temporizador e Intervalos**, edita el tiempo directamente haciendo clic sobre él.  
 4️⃣ **Usa el botón "Reiniciar Contador" en Intervalos** para volver al tiempo guardado sin borrar la configuración.  
 5️⃣ **Usa el botón “Volver”** para regresar al menú principal.  
+6️⃣ **Los intervalos seguirán repitiéndose automáticamente hasta que los pauses o resetees.**  
 
 ---
 

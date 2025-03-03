@@ -97,19 +97,18 @@ function resetTimer() {
 }
 
 // -------------------- INTERVALOS --------------------
-
 let intervalCountdown, breakCountdown;
-let savedIntervalTime = 30000;
-let savedBreakTime = 30000;
+let savedIntervalTime = 30000;  // Tiempo configurado del ciclo
+let savedBreakTime = 30000;  // Tiempo configurado del descanso
 
 document.getElementById("interval-display").addEventListener("input", (e) => {
   intervalTime = parseTimeInput(e.target.innerText);
-  savedIntervalTime = intervalTime; // Guardamos el tiempo ingresado
+  savedIntervalTime = intervalTime; // Guardamos el tiempo configurado
 });
 
 document.getElementById("break-display").addEventListener("input", (e) => {
   breakTime = parseTimeInput(e.target.innerText);
-  savedBreakTime = breakTime; // Guardamos el tiempo ingresado
+  savedBreakTime = breakTime; // Guardamos el tiempo configurado
 });
 
 function startInterval() {
@@ -121,13 +120,15 @@ function startInterval() {
 
 function runIntervalCycle() {
   clearInterval(intervalCountdown);
+  intervalTime = savedIntervalTime; // Restablecemos el tiempo del ciclo
+  document.getElementById("interval-display").innerText =
+    formatTime(intervalTime);
+
   intervalCountdown = setInterval(() => {
     if (intervalTime <= 0) {
       clearInterval(intervalCountdown);
       playSound();
-      setTimeout(() => {
-        runBreakCycle();
-      }, 500);
+      runBreakCycle(); // Ahora se ejecuta el descanso de inmediato sin delay
       return;
     }
     intervalTime -= 1000;
@@ -138,11 +139,14 @@ function runIntervalCycle() {
 
 function runBreakCycle() {
   clearInterval(breakCountdown);
+  breakTime = savedBreakTime; // Restablecemos el tiempo del descanso
+  document.getElementById("break-display").innerText = formatTime(breakTime);
+
   breakCountdown = setInterval(() => {
     if (breakTime <= 0) {
       clearInterval(breakCountdown);
       playSound();
-      isIntervalRunning = false;
+      runIntervalCycle(); // Ahora el ciclo se repite automáticamente
       return;
     }
     breakTime -= 1000;
@@ -159,8 +163,8 @@ function pauseInterval() {
 function restartInterval() {
   clearInterval(intervalCountdown);
   clearInterval(breakCountdown);
-  intervalTime = savedIntervalTime; // Reinicia al tiempo guardado
-  breakTime = savedBreakTime; // Reinicia al tiempo guardado
+  intervalTime = savedIntervalTime;
+  breakTime = savedBreakTime;
   document.getElementById("interval-display").innerText =
     formatTime(intervalTime);
   document.getElementById("break-display").innerText = formatTime(breakTime);
@@ -204,7 +208,6 @@ function parseTimeInput(value) {
 
   return 0; // Evitar NaN si la entrada es inválida
 }
-
 // -------------------- SONIDO --------------------
 function playSound() {
   let audio = new Audio();
