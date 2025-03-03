@@ -1,0 +1,167 @@
+/* Estilos generales */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+body {
+  background-color: #121212;
+  color: #f5f5f5;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  text-align: center;
+  width: 90%;
+  max-width: 500px;
+  padding: 2rem;
+  background-color: #1e1e1e;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Título */
+h1 {
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: #e0e0e0;
+}
+
+/* Display del contador */
+#display {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin: 1.5rem 0;
+  color: #ffffff;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animación para los dígitos cambiantes */
+@keyframes numberChange {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Clase para aplicar a los dígitos cuando cambian */
+.digit-changed {
+  animation: numberChange 0.3s ease-out;
+}
+
+/* Controles de entrada para countdown */
+#countdown-input {
+  margin: 1.5rem 0;
+}
+
+#countdown-input input {
+  background-color: #2d2d2d;
+  border: none;
+  border-radius: 5px;
+  color: #ffffff;
+  padding: 0.8rem;
+  margin: 0 0.5rem;
+  width: 100px;
+  text-align: center;
+  font-size: 1rem;
+}
+
+#countdown-input input:focus {
+  outline: 2px solid #4a90e2;
+}
+
+/* Botones */
+button {
+  background-color: #2d2d2d;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.8rem 1.2rem;
+  margin: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  font-size: 0.9rem;
+}
+
+button:hover {
+  background-color: #3d3d3d;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+#start {
+  background-color: #2e7d32;
+}
+
+#start:hover {
+  background-color: #388e3c;
+}
+
+#pause {
+  background-color: #f57c00;
+}
+
+#pause:hover {
+  background-color: #ff9800;
+}
+
+#reset {
+  background-color: #c62828;
+}
+
+#reset:hover {
+  background-color: #d32f2f;
+}
+
+#set-countdown {
+  background-color: #1976d2;
+}
+
+#set-countdown:hover {
+  background-color: #2196f3;
+}
+
+/* Secciones */
+.controls {
+  margin: 1.5rem 0;
+}
+
+.toggle-mode {
+  margin-top: 1.5rem;
+}
+
+/* Utilidades */
+.hidden {
+  display: none;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  #display {
+    font-size: 2.8rem;
+  }
+  
+  #countdown-input input {
+    width: 80px;
+    margin: 0.3rem;
+  }
+  
+  button {
+    padding: 0.7rem 1rem;
+  }
+} 
