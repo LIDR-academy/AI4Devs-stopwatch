@@ -31,6 +31,26 @@ Incluye tres funcionalidades principales:
 - 🔄 **Reiniciar solo el contador sin borrar configuración**.
 - 🔁 **Ahora el ciclo de trabajo y descanso se repite automáticamente**.
 
+----
+
+# 📜 Changelog - v2.3 (Mejora de Interfaz con Íconos)
+
+## 🔥 v2.3 - Agregado de Íconos a los Botones 🚀
+✅ **Se añadieron íconos FontAwesome a los botones de Cronómetro, Temporizador e Intervalos**:  
+   - 🎬 **Botón "Iniciar"** → `fa-play`  
+   - ⏸ **Botón "Pausar"** → `fa-pause`  
+   - 🔄 **Botón "Reiniciar"** → `fa-redo`  
+   - 🗑 **Botón "Clear"** (para Temporizador) → `fa-trash`  
+   - 🏁 **Botón "Paro Parcial"** (Cronómetro) → `fa-flag`  
+   - ↩ **Botón "Volver"** → `fa-arrow-left`  
+
+✅ **Mejorada la estética y usabilidad de los botones**:  
+   - Ahora los botones tienen una apariencia más moderna e intuitiva.  
+   - Se mejora la accesibilidad visual para una mejor experiencia de usuario.  
+
+✅ **Compatibilidad asegurada con FontAwesome**:  
+   - Se usó la versión `6.0.0` para asegurar compatibilidad con todos los navegadores.  
+
 ---
 
 ## 📜 **Changelog - Historial de Mejoras**
