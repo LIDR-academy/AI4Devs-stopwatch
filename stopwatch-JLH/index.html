@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Engineering Evolution</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+        }
+        .header-container {
+            width: 100%;
+            height: 15vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            background: linear-gradient(to right, #1e3c72, #2a5298);
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        .logo i {
+            margin-right: 10px;
+        }
+        .level-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        .level-btn {
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #4CAF50;
+            color: white;
+        }
+        .level-btn:hover {
+            background: #45a049;
+            transform: scale(1.1);
+        }
+        .main-container {
+            width: 90%;
+            max-width: 1200px;
+            height: 75vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .content-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 20px;
+        }
+        .timer-box {
+            background: green;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .frame-container {
+            display: none;
+            text-align: center;
+            margin-top: 30px;
+            padding-bottom: 50px;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #222;
+            color: white;
+            width: 100%;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+        .footer-icon {
+            font-size: 30px;
+            cursor: pointer;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        .footer-icon:hover {
+            transform: scale(1.3);
+            color: #ffcc00;
+        }
+    </style>
+</head>
+<body>
+    <header class="header-container">
+        <div class="logo">
+            <i class="fas fa-code"></i> AI4DEVS
+        </div>
+        <div class="level-buttons">
+            <button class="level-btn" onclick="changeLevel(1)">Nivel 1</button>
+            <button class="level-btn" onclick="changeLevel(2)">Nivel 2</button>
+            <button class="level-btn" onclick="changeLevel(3)">Nivel 3</button>
+        </div>
+    </header>
+    <div class="main-container">
+        <h1 id="title" class="title-effect" style="font-size: 32px; font-weight: bold; margin-top: 50px;">
+            <span class="highlight">Trabajo de un <span class="ai4devs">AI4DEVS</span></span> haciendo la tarea...
+        </h1>
+        <div class="content-section" id="timer-container">
+            <div class="timer-box">
+                <i class="fas fa-clock"></i>
+                <span id="timer" style="font-size: 50px; font-weight: bold;">00:00:00</span>
+            </div>
+        </div>
+        <div class="button-group" id="buttons-container">
+            <button id="startStopBtn" class="green animated-btn">Iniciar</button>
+            <button id="resetBtn" class="red animated-btn">Detener</button>
+        </div>
+        <div class="button-group" id="special-container">
+            <button id="specialBtn" class="special-effect">Acción Especial</button>
+        </div>
+        <div class="frame-container" id="externalTimer">
+            <iframe width="475" height="250" src="https://reloj-alarma.es/embed/cronometro/#theme=0" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="frame-container" id="dinoContainer" style="margin-top: 20px;">
+            <iframe src="https://chromedino.com/" frameborder="0" scrolling="no" width="80%" height="300px" loading="lazy"></iframe>
+        </div>
+    </div>
+    <footer class="footer">
+        <i class="fas fa-cogs footer-icon"></i>
+        <i class="fas fa-lightbulb footer-icon"></i>
+        <i class="fas fa-laptop-code footer-icon"></i>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
+
