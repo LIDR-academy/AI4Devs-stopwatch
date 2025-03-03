@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
+body {
+    font-family: 'Orbitron', sans-serif;
+}
+
+.time-display {
+    font-size: 4rem;
+    font-weight: bold;
+    background-color: rgba(255, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 10px;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+
+.hidden {
+    display: none !important;
+    /* Fuerza que los elementos ocultos no se muestren */
+}
+
+.screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
