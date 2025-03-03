@@ -33,13 +33,22 @@
         <h2 class="text-warning">Cronómetro</h2>
         <div id="cronometro-display" class="time-display">00:00:00.000</div>
         <div class="mt-3">
-            <button class="btn btn-success" onclick="startCronometro()">Iniciar</button>
-            <button class="btn btn-warning" onclick="pauseCronometro()">Pausar</button>
-            <button class="btn btn-danger" onclick="resetCronometro()">Reset</button>
-            <button class="btn btn-info" onclick="partialStop()">Paro Parcial</button>
+            <button class="btn btn-success" onclick="startCronometro()">
+                <i class="fas fa-play"></i> Iniciar
+            </button>
+            <button class="btn btn-warning" onclick="pauseCronometro()">
+                <i class="fas fa-pause"></i> Pausar
+            </button>
+            <button class="btn btn-danger" onclick="resetCronometro()">
+                <i class="fas fa-redo"></i> Reset
+            </button>
+            <button class="btn btn-info" onclick="partialStop()">
+                <i class="fas fa-flag"></i> Paro Parcial
+            </button>
         </div>
         <ul id="partial-list" class="list-group mt-3"></ul>
-        <button class="btn btn-outline-light mt-4" onclick="showScreen('home')">Volver</button>
+        <button class="btn btn-outline-light mt-4" onclick="showScreen('home')"><i class="fas fa-arrow-left"></i>
+            Volver</button>
     </div>
 
     <!-- Pantalla de Temporizador -->
@@ -47,11 +56,18 @@
         <h2 class="text-warning">Temporizador</h2>
         <div id="timer-display" class="time-display editable" contenteditable="true">00:00:00</div>
         <div class="mt-3">
-            <button class="btn btn-success" onclick="startTimer()">Iniciar</button>
-            <button class="btn btn-warning" onclick="pauseTimer()">Pausar</button>
-            <button class="btn btn-danger" onclick="resetTimer()">Clear</button>
+            <button class="btn btn-success" onclick="startTimer()">
+                <i class="fas fa-play"></i> Iniciar
+            </button>
+            <button class="btn btn-warning" onclick="pauseTimer()">
+                <i class="fas fa-pause"></i> Pausar
+            </button>
+            <button class="btn btn-danger" onclick="resetTimer()">
+                <i class="fas fa-trash"></i> Clear
+            </button>
         </div>
-        <button class="btn btn-outline-light mt-4" onclick="showScreen('home')">Volver</button>
+        <button class="btn btn-outline-light mt-4" onclick="showScreen('home')"><i class="fas fa-arrow-left"></i>
+            Volver</button>
     </div>
 
     <!-- Pantalla de Intervalos -->
@@ -68,12 +84,21 @@
             </div>
         </div>
         <div class="mt-3">
-            <button class="btn btn-success" onclick="startInterval()">Iniciar</button>
-            <button class="btn btn-warning" onclick="pauseInterval()">Pausar</button>
-            <button class="btn btn-info" onclick="restartInterval()">Reiniciar Contador</button>
-            <button class="btn btn-danger" onclick="resetInterval()">Reset Configuración</button>
+            <button class="btn btn-success" onclick="startInterval()">
+                <i class="fas fa-play"></i> Iniciar
+            </button>
+            <button class="btn btn-warning" onclick="pauseInterval()">
+                <i class="fas fa-pause"></i> Pausar
+            </button>
+            <button class="btn btn-info" onclick="restartInterval()">
+                <i class="fas fa-redo"></i> Reiniciar Contador
+            </button>
+            <button class="btn btn-danger" onclick="resetInterval()">
+                <i class="fas fa-trash"></i> Reset Configuración
+            </button>
         </div>
-        <button class="btn btn-outline-light mt-4" onclick="showScreen('home')">Volver</button>
+        <button class="btn btn-outline-light mt-4" onclick="showScreen('home')"><i class="fas fa-arrow-left"></i>
+            Volver</button>
     </div>
 
     <script src="script.js"></script>
