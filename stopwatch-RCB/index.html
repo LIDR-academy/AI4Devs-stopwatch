@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TimeMaster - Futuristic Timer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- Pantalla de Selección -->
+    <div id="home-screen">
+        <h1>TimeMaster</h1>
+        <button class="menu-btn" onclick="showScreen('cronometro')">Cronómetro</button>
+        <button class="menu-btn" onclick="showScreen('temporizador')">Temporizador</button>
+        <button class="menu-btn" onclick="showScreen('intervalos')">Intervalos</button>
+    </div>
+
+    <!-- Pantalla de Cronómetro -->
+    <div id="cronometro-screen" class="hidden">
+        <h2>Cronómetro</h2>
+        <div id="cronometro-display">00:00:00.000</div>
+        <button onclick="startCronometro()">Iniciar</button>
+        <button onclick="pauseCronometro()">Pausar</button>
+        <button onclick="resetCronometro()">Reset</button>
+        <button onclick="partialStop()">Paro Parcial</button>
+        <ul id="partial-list"></ul>
+        <button class="back-btn" onclick="showScreen('home')">Volver</button>
+    </div>
+
+    <!-- Pantalla de Temporizador -->
+    <div id="temporizador-screen" class="hidden">
+        <h2>Temporizador</h2>
+        <input type="text" id="timer-input" placeholder="hh:mm:ss">
+        <div id="timer-display">00:00:00</div>
+        <button onclick="startTimer()">Iniciar</button>
+        <button onclick="pauseTimer()">Pausar</button>
+        <button onclick="resetTimer()">Clear</button>
+        <button class="back-btn" onclick="showScreen('home')">Volver</button>
+    </div>
+
+    <!-- Pantalla de Intervalos -->
+    <div id="intervalos-screen" class="hidden">
+        <h2>Intervalos</h2>
+        <label>Duración de Intervalo:</label>
+        <input type="text" id="interval-duration" placeholder="hh:mm:ss">
+        <label>Descanso:</label>
+        <input type="text" id="interval-break" placeholder="hh:mm:ss">
+        <div id="interval-display">00:00</div>
+        <button onclick="startInterval()">Iniciar</button>
+        <button onclick="resetInterval()">Reset</button>
+        <button class="back-btn" onclick="showScreen('home')">Volver</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
