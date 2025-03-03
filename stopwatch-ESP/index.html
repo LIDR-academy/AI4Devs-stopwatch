@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch and Countdown Timer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .selector {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            border-top: 2px solid #0066cc;
+            border-bottom: 2px solid #0066cc;
+            padding: 10px 0;
+        }
+
+        .selector-half {
+            width: 50%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .selector-half:first-child {
+            border-right: 1px solid #ccc;
+        }
+
+        .selector-half:last-child {
+            border-left: 1px solid #ccc;
+        }
+
+        .arrow-up {
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 80px solid #00cc00;
+            margin-bottom: 10px;
+        }
+
+        .arrow-down {
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-top: 80px solid #ff3333;
+            margin-bottom: 10px;
+        }
+
+        .time-display {
+            background-color: #e6e6ff;
+            border-radius: 10px;
+            padding: 15px;
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .milliseconds {
+            font-size: 20px;
+            position: absolute;
+            right: 15px;
+            bottom: 15px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 15px 0;
+            border-radius: 10px;
+            border: 2px solid #333;
+            font-size: 24px;
+            width: 100%;
+            cursor: pointer;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .btn-green {
+            background-color: #00cc00;
+            color: black;
+        }
+
+        .btn-red {
+            background-color: #ff3333;
+            color: black;
+        }
+
+        .btn-blue {
+            background-color: #0099ff;
+            color: black;
+        }
+
+        .btn-gray {
+            background-color: #cccccc;
+            color: black;
+        }
+
+        .number-pad {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 5px;
+            margin-bottom: 20px;
+        }
+
+        .number-btn {
+            padding: 10px 0;
+            border-radius: 5px;
+            border: 2px solid #333;
+            font-size: 20px;
+            cursor: pointer;
+            text-align: center;
+            background-color: #00cc00;
+            color: black;
+            font-weight: bold;
+        }
+
+        .number-btn.clear {
+            background-color: #cccccc;
+        }
+
+        .back-btn {
+            margin-top: 20px;
+            background-color: #0066cc;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            align-self: flex-start;
+        }
+
+        .screen {
+            display: none;
+        }
+
+        .active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Selection Screen -->
+        <div id="selector-screen" class="screen active">
+            <div class="selector">
+                <div class="selector-half" id="select-stopwatch">
+                    <div class="arrow-up"></div>
+                    <h2>Stopwatch</h2>
+                </div>
+                <div class="selector-half" id="select-countdown">
+                    <div class="arrow-down"></div>
+                    <h2>Countdown</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stopwatch Screen -->
+        <div id="stopwatch-screen" class="screen">
+            <div class="time-display">
+                <span id="stopwatch-time">00:00:00</span>
+                <span class="milliseconds" id="stopwatch-ms">000</span>
+            </div>
+            <div class="buttons">
+                <div class="btn btn-green" id="stopwatch-start-btn">Start</div>
+                <div class="btn btn-red" id="stopwatch-clear-btn">Clear</div>
+            </div>
+            <div class="back-btn" id="stopwatch-back-btn">Back</div>
+        </div>
+
+        <!-- Countdown Set Screen -->
+        <div id="countdown-set-screen" class="screen">
+            <div class="time-display">
+                <span id="countdown-set-time">00:00:00</span>
+                <span class="milliseconds" id="countdown-set-ms">000</span>
+            </div>
+            <div class="number-pad">
+                <div class="number-btn" data-num="5">5</div>
+                <div class="number-btn" data-num="6">6</div>
+                <div class="number-btn" data-num="7">7</div>
+                <div class="number-btn" data-num="8">8</div>
+                <div class="number-btn" data-num="9">9</div>
+                <div class="number-btn" id="countdown-set-btn">Set</div>
+                <div class="number-btn" data-num="0">0</div>
+                <div class="number-btn" data-num="1">1</div>
+                <div class="number-btn" data-num="2">2</div>
+                <div class="number-btn" data-num="3">3</div>
+                <div class="number-btn" data-num="4">4</div>
+                <div class="number-btn clear" id="countdown-clear-set-btn">Clear</div>
+            </div>
+            <div class="back-btn" id="countdown-set-back-btn">Back</div>
+        </div>
+
+        <!-- Countdown Running Screen -->
+        <div id="countdown-screen" class="screen">
+            <div class="time-display">
+                <span id="countdown-time">00:00:00</span>
+                <span class="milliseconds" id="countdown-ms">000</span>
+            </div>
+            <div class="buttons">
+                <div class="btn btn-green" id="countdown-start-btn">Start</div>
+                <div class="btn btn-red" id="countdown-clear-btn">Clear</div>
+            </div>
+            <div class="back-btn" id="countdown-back-btn">Back</div>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const selectorScreen = document.getElementById('selector-screen');
+        const stopwatchScreen = document.getElementById('stopwatch-screen');
+        const countdownSetScreen = document.getElementById('countdown-set-screen');
+        const countdownScreen = document.getElementById('countdown-screen');
+
+        // Stopwatch Elements
+        const stopwatchTime = document.getElementById('stopwatch-time');
+        const stopwatchMs = document.getElementById('stopwatch-ms');
+        const stopwatchStartBtn = document.getElementById('stopwatch-start-btn');
+        const stopwatchClearBtn = document.getElementById('stopwatch-clear-btn');
+        const stopwatchBackBtn = document.getElementById('stopwatch-back-btn');
+
+        // Countdown Set Elements
+        const countdownSetTime = document.getElementById('countdown-set-time');
+        const countdownSetMs = document.getElementById('countdown-set-ms');
+        const numberBtns = document.querySelectorAll('.number-btn[data-num]');
+        const countdownSetBtn = document.getElementById('countdown-set-btn');
+        const countdownClearSetBtn = document.getElementById('countdown-clear-set-btn');
+        const countdownSetBackBtn = document.getElementById('countdown-set-back-btn');
+
+        // Countdown Elements
+        const countdownTime = document.getElementById('countdown-time');
+        const countdownMs = document.getElementById('countdown-ms');
+        const countdownStartBtn = document.getElementById('countdown-start-btn');
+        const countdownClearBtn = document.getElementById('countdown-clear-btn');
+        const countdownBackBtn = document.getElementById('countdown-back-btn');
+
+        // Selectors
+        const selectStopwatch = document.getElementById('select-stopwatch');
+        const selectCountdown = document.getElementById('select-countdown');
+
+        // Variables for Stopwatch
+        let stopwatchInterval;
+        let stopwatchStartTime;
+        let stopwatchElapsed = 0;
+        let stopwatchRunning = false;
+
+        // Variables for Countdown
+        let countdownInterval;
+        let countdownEndTime;
+        let countdownRemaining = 0;
+        let countdownRunning = false;
+        let countdownPaused = false;
+        let countdownValue = "000000";
+        let countdownInputIndex = 5; // Start from seconds
+
+        // Helper Functions
+        function showScreen(screen) {
+            // Hide all screens
+            selectorScreen.classList.remove('active');
+            stopwatchScreen.classList.remove('active');
+            countdownSetScreen.classList.remove('active');
+            countdownScreen.classList.remove('active');
+
+            // Show the selected screen
+            screen.classList.add('active');
+        }
+
+        function formatTime(milliseconds, showMs = true) {
+            const hours = Math.floor(milliseconds / 3600000);
+            const minutes = Math.floor((milliseconds % 3600000) / 60000);
+            const seconds = Math.floor((milliseconds % 60000) / 1000);
+            const ms = milliseconds % 1000;
+
+            const formattedHours = String(hours).padStart(2, '0');
+            const formattedMinutes = String(minutes).padStart(2, '0');
+            const formattedSeconds = String(seconds).padStart(2, '0');
+            const formattedMs = String(ms).padStart(3, '0');
+
+            if (showMs) {
+                return {
+                    time: `${formattedHours}:${formattedMinutes}:${formattedSeconds}`,
+                    ms: formattedMs
+                };
+            } else {
+                return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+            }
+        }
+
+        // Stopwatch Functions
+        function startStopwatch() {
+            if (!stopwatchRunning) {
+                stopwatchRunning = true;
+                stopwatchStartBtn.textContent = 'Pause';
+                stopwatchStartTime = Date.now() - stopwatchElapsed;
+                stopwatchInterval = setInterval(updateStopwatch, 10);
+            } else {
+                stopwatchRunning = false;
+                stopwatchStartBtn.textContent = 'Continue';
+                stopwatchStartBtn.classList.remove('btn-green');
+                stopwatchStartBtn.classList.add('btn-blue');
+                clearInterval(stopwatchInterval);
+            }
+        }
+
+        function updateStopwatch() {
+            stopwatchElapsed = Date.now() - stopwatchStartTime;
+            const formatted = formatTime(stopwatchElapsed);
+            stopwatchTime.textContent = formatted.time;
+            stopwatchMs.textContent = formatted.ms;
+        }
+
+        function clearStopwatch() {
+            clearInterval(stopwatchInterval);
+            stopwatchElapsed = 0;
+            stopwatchRunning = false;
+            stopwatchStartBtn.textContent = 'Start';
+            stopwatchStartBtn.classList.remove('btn-blue');
+            stopwatchStartBtn.classList.add('btn-green');
+            stopwatchTime.textContent = '00:00:00';
+            stopwatchMs.textContent = '000';
+        }
+
+        // Countdown Functions
+        function updateCountdownSetDisplay() {
+            // Extract hours, minutes, seconds from the input value
+            const hours = countdownValue.substring(0, 2);
+            const minutes = countdownValue.substring(2, 4);
+            const seconds = countdownValue.substring(4, 6);
+            
+            countdownSetTime.textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        function handleNumberInput(num) {
+            // Update the value at the current input index
+            countdownValue = 
+                countdownValue.substring(0, countdownInputIndex) + 
+                num + 
+                countdownValue.substring(countdownInputIndex + 1);
+            
+            // Move input index to the left (unless at leftmost position)
+            if (countdownInputIndex > 0) {
+                countdownInputIndex--;
+            }
+            
+            updateCountdownSetDisplay();
+        }
+
+        function clearCountdownSet() {
+            countdownValue = "000000";
+            countdownInputIndex = 5;
+            updateCountdownSetDisplay();
+            countdownSetMs.textContent = "000";
+        }
+
+        function setCountdown() {
+            // Parse the countdown value into milliseconds
+            const hours = parseInt(countdownValue.substring(0, 2));
+            const minutes = parseInt(countdownValue.substring(2, 4));
+            const seconds = parseInt(countdownValue.substring(4, 6));
+            
+            countdownRemaining = (hours * 3600000) + (minutes * 60000) + (seconds * 1000);
+            
+            // Only proceed if there is a valid time set
+            if (countdownRemaining > 0) {
+                // Set the countdown time display
+                const formatted = formatTime(countdownRemaining);
+                countdownTime.textContent = formatted.time;
+                countdownMs.textContent = formatted.ms;
+                
+                // Switch to countdown screen
+                showScreen(countdownScreen);
+            }
+        }
+
+        function startCountdown() {
+            if (!countdownRunning) {
+                if (countdownRemaining > 0) {
+                    countdownRunning = true;
+                    countdownPaused = false;
+                    countdownStartBtn.textContent = 'Pause';
+                    countdownStartBtn.classList.remove('btn-blue');
+                    countdownStartBtn.classList.add('btn-green');
+                    
+                    countdownEndTime = Date.now() + countdownRemaining;
+                    countdownInterval = setInterval(updateCountdown, 10);
+                }
+            } else {
+                countdownRunning = false;
+                countdownPaused = true;
+                countdownStartBtn.textContent = 'Continue';
+                countdownStartBtn.classList.remove('btn-green');
+                countdownStartBtn.classList.add('btn-blue');
+                clearInterval(countdownInterval);
+            }
+        }
+
+        function updateCountdown() {
+            countdownRemaining = countdownEndTime - Date.now();
+            
+            if (countdownRemaining <= 0) {
+                clearInterval(countdownInterval);
+                countdownRemaining = 0;
+                countdownRunning = false;
+                countdownPaused = false;
+                countdownStartBtn.textContent = 'Start';
+                countdownStartBtn.classList.remove('btn-blue');
+                countdownStartBtn.classList.add('btn-green');
+            }
+            
+            const formatted = formatTime(countdownRemaining);
+            countdownTime.textContent = formatted.time;
+            countdownMs.textContent = formatted.ms;
+        }
+
+        function clearCountdown() {
+            clearInterval(countdownInterval);
+            countdownRunning = false;
+            countdownPaused = false;
+            showScreen(countdownSetScreen);
+            clearCountdownSet();
+        }
+
+        // Event Listeners
+        // Selector screen
+        selectStopwatch.addEventListener('click', () => {
+            showScreen(stopwatchScreen);
+        });
+
+        selectCountdown.addEventListener('click', () => {
+            showScreen(countdownSetScreen);
+            clearCountdownSet();
+        });
+
+        // Stopwatch screen
+        stopwatchStartBtn.addEventListener('click', startStopwatch);
+        stopwatchClearBtn.addEventListener('click', clearStopwatch);
+        stopwatchBackBtn.addEventListener('click', () => {
+            clearStopwatch();
+            showScreen(selectorScreen);
+        });
+
+        // Countdown set screen
+        numberBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                handleNumberInput(btn.getAttribute('data-num'));
+            });
+        });
+
+        countdownSetBtn.addEventListener('click', setCountdown);
+        countdownClearSetBtn.addEventListener('click', clearCountdownSet);
+        countdownSetBackBtn.addEventListener('click', () => {
+            showScreen(selectorScreen);
+        });
+
+        // Countdown screen
+        countdownStartBtn.addEventListener('click', startCountdown);
+        countdownClearBtn.addEventListener('click', clearCountdown);
+        countdownBackBtn.addEventListener('click', () => {
+            clearInterval(countdownInterval);
+            showScreen(selectorScreen);
+        });
+    </script>
+</body>
+</html>
