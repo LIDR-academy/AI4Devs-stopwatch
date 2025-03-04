@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Stopwatch & Countdown</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <div class="container">
+            <!-- Pantalla del cronómetro -->
+            <div id="display">00:00:00</div>
+
+            <!-- Controles para seleccionar el modo -->
+            <div id="controls">
+                <label>
+                    <input type="radio" name="mode" value="stopwatch" checked />
+                    Ascending
+                </label>
+                <label>
+                    <input type="radio" name="mode" value="countdown" />
+                    Descending
+                </label>
+
+                <!-- Controles para ingresar la cuenta regresiva -->
+                <div id="countdown-settings" style="display: none">
+                    <input
+                        type="number"
+                        id="minutes"
+                        min="0"
+                        max="59"
+                        value="0"
+                    />
+                    <input
+                        type="number"
+                        id="seconds"
+                        min="0"
+                        max="59"
+                        value="0"
+                    />
+                    <input
+                        type="number"
+                        id="milliseconds"
+                        min="0"
+                        max="999"
+                        value="0"
+                    />
+                    <button id="setCountdown">Set Countdown</button>
+                </div>
+            </div>
+            <!-- Botones de control -->
+            <div class="buttons">
+                <button id="start">Start</button>
+                <button id="clear">Clear</button>
+            </div>
+        </div>
+
+        <script src="script.js"></script>
+    </body>
+</html>
