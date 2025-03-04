@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronómetro Avanzado</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2 id="modeTitle">Seleccionar Modo</h2>
+        <div class="mode-selection">
+            <button id="modeChrono">Cronómetro</button>
+            <button id="modeCountdown">Cuenta Atrás</button>
+        </div>
+
+        <div class="cronometro hidden">
+            <span id="horas">00</span>:<span id="minutos">00</span>:<span id="segundos">00</span> 
+            <span id="milisegundos">000</span>
+        </div>
+
+        <div class="botones hidden">
+            <button id="start">Iniciar</button>
+            <button id="resume" class="hidden">Reiniciar</button>
+            <button id="pause" class="hidden">Pausar</button>
+            <button id="lap" class="hidden">Vuelta</button>
+            <button id="stop" class="hidden">Detener</button>
+            <button id="addTime" class="hidden">+30 seg</button>
+            <button id="reset" class="hidden">Reset</button>
+            <button id="cancel">Cancelar</button>
+        </div>
+
+        <div class="laps hidden">
+            <h3>Vueltas</h3>
+            <ul id="lapsList"></ul>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
