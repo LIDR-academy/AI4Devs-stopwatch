@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)http://localhost:1234/ -->
+<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronómetro y Cuenta Atrás Retro</title>
+    <link rel="stylesheet" href="./AI4Devs-stopwatch_MAR_files/main.a9dacefc.css">
+  <script src="./AI4Devs-stopwatch_MAR_files/main.a9dacefc.js"></script></head>
+  <body>
+    <div id="app"><div class="home-container"><div class="home-option home-option-timer"><div class="home-option-icon">
+    <svg width="300" height="200" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+      <!-- Carcasa principal del cassette -->
+      <rect x="20" y="30" width="260" height="140" rx="10" ry="10" fill="#333333" stroke="#000000" stroke-width="2"></rect>
+      
+      <!-- Etiqueta central -->
+      <rect x="40" y="50" width="220" height="100" rx="5" ry="5" fill="#e0e0e0" stroke="#000000" stroke-width="1"></rect>
+      
+      <!-- Ventanas para ver la cinta -->
+      <rect x="60" y="70" width="60" height="60" rx="3" ry="3" fill="#222222" stroke="#000000" stroke-width="1"></rect>
+      <rect x="180" y="70" width="60" height="60" rx="3" ry="3" fill="#222222" stroke="#000000" stroke-width="1"></rect>
+      
+      <!-- Carretes (que girarán) -->
+      <g id="left-reel">
+        <circle cx="90" cy="100" r="25" fill="#111111" stroke="#000000" stroke-width="1"></circle>
+        <circle cx="90" cy="100" r="10" fill="#333333" stroke="#000000" stroke-width="1"></circle>
+        <line x1="90" y1="75" x2="90" y2="125" stroke="#333333" stroke-width="2"></line>
+        <line x1="65" y1="100" x2="115" y2="100" stroke="#333333" stroke-width="2"></line>
+      </g>
+      
+      <g id="right-reel">
+        <circle cx="210" cy="100" r="25" fill="#111111" stroke="#000000" stroke-width="1"></circle>
+        <circle cx="210" cy="100" r="10" fill="#333333" stroke="#000000" stroke-width="1"></circle>
+        <line x1="210" y1="75" x2="210" y2="125" stroke="#333333" stroke-width="2"></line>
+        <line x1="185" y1="100" x2="235" y2="100" stroke="#333333" stroke-width="2"></line>
+      </g>
+      
+      <!-- Agujeros para los engranajes -->
+      <circle cx="90" cy="100" r="5" fill="#000000"></circle>
+      <circle cx="210" cy="100" r="5" fill="#000000"></circle>
+      
+      <!-- Detalles adicionales -->
+      <rect x="130" y="80" width="40" height="40" rx="2" ry="2" fill="#cccccc" stroke="#000000" stroke-width="1"></rect>
+      <text x="150" y="105" font-family="Arial" font-size="12" text-anchor="middle" fill="#333333">RETRO</text>
+      
+      <!-- Agujeros para los tornillos -->
+      <circle cx="40" cy="50" r="3" fill="#666666" stroke="#000000" stroke-width="1"></circle>
+      <circle cx="260" cy="50" r="3" fill="#666666" stroke="#000000" stroke-width="1"></circle>
+      <circle cx="40" cy="150" r="3" fill="#666666" stroke="#000000" stroke-width="1"></circle>
+      <circle cx="260" cy="150" r="3" fill="#666666" stroke="#000000" stroke-width="1"></circle>
+      
+      <style>
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+        #left-reel {
+          transform-origin: 90px 100px;
+          animation: spin 4s linear infinite;
+          animation-play-state: paused;
+        }
+        #right-reel {
+          transform-origin: 210px 100px;
+          animation: spin 4s linear infinite;
+          animation-play-state: paused;
+        }
+        .playing #left-reel, .playing #right-reel {
+          animation-play-state: running;
+        }
+      </style>
+    </svg>
+  </div><div>CRONÓMETRO</div></div><div class="home-option home-option-countdown"><div class="home-option-icon">
+    <svg width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+      <!-- Disco de vinilo -->
+      <g id="vinyl-disc">
+        <!-- Disco exterior -->
+        <circle cx="150" cy="150" r="140" fill="#111111" stroke="#000000" stroke-width="2"></circle>
+        
+        <!-- Surcos del disco -->
+        <circle cx="150" cy="150" r="130" fill="none" stroke="#222222" stroke-width="1"></circle>
+        <circle cx="150" cy="150" r="120" fill="none" stroke="#222222" stroke-width="1"></circle>
+        <circle cx="150" cy="150" r="110" fill="none" stroke="#222222" stroke-width="1"></circle>
+        <circle cx="150" cy="150" r="100" fill="none" stroke="#222222" stroke-width="1"></circle>
+        <circle cx="150" cy="150" r="90" fill="none" stroke="#222222" stroke-width="1"></circle>
+        <circle cx="150" cy="150" r="80" fill="none" stroke="#222222" stroke-width="1"></circle>
+        <circle cx="150" cy="150" r="70" fill="none" stroke="#222222" stroke-width="1"></circle>
+        <circle cx="150" cy="150" r="60" fill="none" stroke="#222222" stroke-width="1"></circle>
+        
+        <!-- Etiqueta central -->
+        <circle cx="150" cy="150" r="50" fill="#e76e55" stroke="#000000" stroke-width="1"></circle>
+        <circle cx="150" cy="150" r="20" fill="#111111" stroke="#000000" stroke-width="1"></circle>
+        
+        <!-- Texto en la etiqueta -->
+        <text x="150" y="140" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#ffffff">RETRO</text>
+        <text x="150" y="160" font-family="Arial" font-size="10" text-anchor="middle" fill="#ffffff">COUNTDOWN</text>
+        
+        <!-- Detalles adicionales -->
+        <circle cx="150" cy="150" r="5" fill="#000000"></circle>
+        
+        <!-- Reflejo para dar efecto brillante -->
+        <ellipse cx="120" cy="120" rx="60" ry="20" fill="rgba(255, 255, 255, 0.1)" transform="rotate(-30, 120, 120)"></ellipse>
+      </g>
+      
+      <style>
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+        #vinyl-disc {
+          transform-origin: 150px 150px;
+          animation: spin 10s linear infinite;
+          animation-play-state: paused;
+        }
+        .playing #vinyl-disc {
+          animation-play-state: running;
+        }
+      </style>
+    </svg>
+  </div><div>CUENTA ATRÁS</div></div></div></div>
+    <script src="./AI4Devs-stopwatch_MAR_files/src.7ed060e2.js"></script>
+  
+
+</body></html>
