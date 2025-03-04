@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cronómetro - Cuenta Atrás</title>
+  <title>Cronómetro y Cuenta Atrás</title>
   <style>
     /* Estilos generales */
     body {
@@ -114,7 +114,7 @@
   </style>
 </head>
 <body>
-  <h1>Cronómetro - Cuenta Atrás</h1>
+  <h1>Cronómetro y Cuenta Atrás</h1>
   <div class="container">
     <!-- Display con HH:MM:SS y milisegundos -->
     <div id="time-display">
@@ -137,6 +137,12 @@
     <div class="reprogram">
       <label for="reprogram-mins">Reprogramar (min):</label>
       <input type="number" id="reprogram-mins" min="1" placeholder="Minutos"/>
+    </div>
+    <!-- Checkbox para seleccionar el modo de conteo -->
+    <div class="reprogram">
+      <label>
+        <input type="checkbox" id="forward-mode"> Conteo hacia adelante (stopwatch)
+      </label>
     </div>
   </div>
 

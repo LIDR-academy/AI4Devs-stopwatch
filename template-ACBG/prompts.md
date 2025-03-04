@@ -1,17 +1,17 @@
-# chatbot utilizado: ChatGPT
+# chatbot utilizado: ChatGPT modelo GPT-4 desarrollado por OpenAI
 
 # PRIMER PROMPT
 # Eres un experto desarrollador de software y desde muy joven vienes creando repositorios en GuitHub, de una compañía de innovación tecnológica y desarrollo de productos relacionados con software para relojes digitales. 
 
-Como Desarollador y experto programador, debe desarrollar la **Actividad1** en su totalidad cumpliendo con cada uno de los pasos a seguir.
+**Como Desarollador y experto programador, debe desarrollar la **Actividad1** en su totalidad cumpliendo con cada uno de los pasos a seguir.**
 
 # Pasos a seguir y contexto de la ”Actividad_1”:
 
-* crear un cronómetro y cuenta atrás.
+1. crear un cronómetro y cuenta atrás.
 
 * Referencia: [Referencia:](https://www.online-stopwatch.com/) 
 
-* Hazlo apoyado en el seed index.html + script.js que proporcionamos.
+2. Hazlo apoyado en el seed index.html + script.js que proporcionamos.
 
 '''index.html
 
@@ -98,7 +98,7 @@ Pregúntame si no entiendes algo, o si me quieres dar alguna sugerencia?
 
 Respuesta con pregunta del ChatBot
 
-'''ChatGpt
+'''ChatGpt 
 Para asegurarme de que entiendo bien lo que necesitas, tengo algunas preguntas:
 
 ¿Confirmas que el botón Start debe funcionar como un botón de "toggle"? Es decir, al presionarlo cuando el cronómetro está en ejecución, se pausa (mostrando un ícono de pausa, por ejemplo “⏸”, en la esquina superior derecha del texto "Start") y, al presionarlo de nuevo, se reanuda el conteo (y el ícono de pausa desaparece).
@@ -141,3 +141,13 @@ pregúntame lo que no entiendas y si tienes sugerencias, se lo agradezco.
 1- fíjate bien en la imagen de muestra para que dimensiones los tamaños y posición de los números del cronometro para que no queden desalineados.
 
 2- El color y la fuente del string "Reprogramar (min):" debemos modificarlo de un tono más visible al momento de aplicar la animación al fondo.
+
+
+## Desde VsCode / CODEGPT CHAT GPT-4o 
+Actualización de los archivos Cronómetro contando hacia adelante.
+
+# Primer Prompt :
+Requiero por favor ajustar el código para que además de hacer el conteo hacia atras, tambien realice el conteo normal de un cronometro hacia adelante. Debemos agregar un Check box en donde el usuario decida si es conteo hacia adelante "forward stopwatch" o si es conteo hacia atras "backward stopwatch". Procura NO hacer mayores cambios, que sea lo escencial para que funcione con estas nuevas instrucciones por favor.
+
+# Segundo Prompt :
+Funciona super bien! Pero me ayudas con algo más por favor. Si el usuario selecciona el modo hacia adelante, el conteo debe realizarse con las mismas condiciones que la del conteo hacia atras, solo que esta vez, lo hace de forma creciente; es decir, si en la casilla de "Reprogramar (min):" esta el "2" debe hacer el conteo por "dos minutos", se detiene y suena la señal sonora "trompetas sound". y queda nuevamente disponible para que el usuario decida que más quiere hacer. Por ultimo, ayudame corrigiendo el encabezado con el titulo que diga "CRONÓMETRO Y CUENTA ATRÁS" Si tienes dudas, preguntame.

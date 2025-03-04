@@ -5,6 +5,7 @@ let totalMs;        // tiempo total en milisegundos
 let interval = null;
 let isRunning = false;  // indica si el cronómetro está corriendo
 let isPaused = false;   // indica si el cronómetro está en pausa
+let isForwardMode = false; // indica si el cronómetro está en modo hacia adelante
 
 // Elementos HTML
 const hoursEl = document.getElementById('hours');
@@ -15,6 +16,7 @@ const msEl = document.getElementById('milliseconds');
 const startBtn = document.getElementById('start-btn');
 const clearBtn = document.getElementById('clear-btn');
 const reprogramInput = document.getElementById('reprogram-mins');
+const forwardModeCheckbox = document.getElementById('forward-mode');
 
 // Iniciamos en 8 minutos = 8 * 60 * 1000 ms = 480000 ms
 let defaultMinutes = 8;
@@ -97,6 +99,34 @@ function startCountdown() {
   }, 10);
 }
 
+// Inicia o reanuda el conteo hacia adelante (cada 10 ms)
+function startStopwatch() {
+  // Si ya está corriendo, no iniciamos de nuevo
+  if (isRunning) return;
+  
+  // Quita el símbolo de pausa
+  isPaused = false;
+  startBtn.textContent = "Start";
+  
+  // Activa el fondo animado mientras corre
+  setAnimatedBackground();
+  
+  isRunning = true;
+  const targetMs = totalMs + defaultMinutes * 60 * 1000;
+  interval = setInterval(() => {
+    totalMs += 10;
+    updateDisplay();
+    if (totalMs >= targetMs) {
+      clearInterval(interval);
+      isRunning = false;
+      playAlertSound();
+      alert('¡El tiempo se ha agotado!');
+      startBtn.textContent = "Start";
+      document.body.style.backgroundImage = "";
+    }
+  }, 10);
+}
+
 // Pausa el conteo actual
 function pauseCountdown() {
   if (!isRunning) return;
@@ -123,10 +153,15 @@ function clearCountdown() {
  **************************************************************/
 // Al pulsar Start: si está corriendo, se pausa; si está pausado o detenido, se inicia/reanuda.
 startBtn.addEventListener('click', () => {
+  isForwardMode = forwardModeCheckbox.checked;
   if (isRunning) {
     pauseCountdown();
   } else {
-    startCountdown();
+    if (isForwardMode) {
+      startStopwatch();
+    } else {
+      startCountdown();
+    }
   }
 });
 
