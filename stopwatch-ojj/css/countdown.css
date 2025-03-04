@@ -1,0 +1,104 @@
+/* countdown.css - Estilos específicos para la funcionalidad de cuenta atrás */
+
+/* Estilos específicos de la cuenta atrás */
+#countdown-setup-view .timer-display,
+#countdown-view .timer-display {
+  border-left: 5px solid var(--danger-color);
+}
+
+/* Estilos para el indicador de modo de entrada */
+.input-mode-indicator {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+/* Estilos para el teclado numérico */
+.numpad {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 0 auto;
+  max-width: 400px;
+  width: 100%;
+}
+
+.numpad-row {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.num-btn {
+  flex: 1;
+  background-color: var(--card-bg);
+  border: none;
+  font-family: "Roboto Mono", monospace;
+  font-size: 1.5rem;
+  font-weight: 500;
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: all var(--transition-speed);
+}
+
+.num-btn:hover {
+  box-shadow: var(--shadow-hover);
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.num-btn:active {
+  transform: scale(0.98);
+}
+
+/* Animación para cuando la cuenta atrás está funcionando */
+@keyframes countdown-pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.7);
+  }
+  70% {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 10px rgba(244, 67, 54, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(244, 67, 54, 0);
+  }
+}
+
+#countdown-view.running .timer-display {
+  animation: countdown-pulse 2s infinite;
+}
+
+/* Estilos para resaltar la sección que se está configurando */
+.highlight-hour #countdown-setup-hours,
+.highlight-minute #countdown-setup-minutes,
+.highlight-second #countdown-setup-seconds {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+/* Estilos para cuando queda poco tiempo */
+.warning .time {
+  color: var(--danger-color);
+}
+
+/* Estilos para el botón cuando cambia a Pause o Continue */
+#countdown-view .btn-primary.pause {
+  background-color: var(--danger-color);
+}
+
+#countdown-view .btn-primary.pause:hover {
+  background-color: var(--danger-hover);
+}
+
+#countdown-view .btn-primary.continue {
+  background-color: var(--primary-color);
+}
+
+#countdown-view .btn-primary.continue:hover {
+  background-color: var(--primary-hover);
+}

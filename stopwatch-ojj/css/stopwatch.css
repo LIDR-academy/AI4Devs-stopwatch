@@ -1,0 +1,37 @@
+/* stopwatch.css - Estilos específicos para la funcionalidad de cronómetro */
+
+/* Estilos específicos del cronómetro si son necesarios */
+#stopwatch-view .timer-display {
+  border-left: 5px solid var(--success-color);
+}
+
+/* Efectos visuales durante la ejecución */
+.running .time {
+  color: var(--success-color);
+}
+
+/* Animación para cuando el cronómetro está funcionando */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+#stopwatch-view.running .timer-display {
+  animation: pulse 2s infinite;
+}
+
+/* Estilos para el botón cuando cambia a Pause */
+#stopwatch-view .btn-primary.pause {
+  background-color: var(--danger-color);
+}
+
+#stopwatch-view .btn-primary.pause:hover {
+  background-color: var(--danger-hover);
+}
