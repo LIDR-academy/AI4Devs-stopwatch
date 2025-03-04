@@ -1,21 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Timer and Countdown</title>
-<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronómetro y Cuenta Regresiva</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Timer and Countdown</h1>
-    <div class="timer">
-        <span id="timer">00:00:00</span>
-        <span id="milliseconds" class="milliseconds">000</span>
+    <h1>Cronómetro y Cuenta Regresiva</h1>
+
+    <!-- Menú principal -->
+    <div id="menu">
+        <button id="btnStopwatch">
+            <span>Stopwatch</span>
+            <svg width="50" height="50" viewBox="0 0 50 50">
+                <polygon points="25,5 45,40 5,40" fill="green"/>
+            </svg>
+        </button>
+        <button id="btnCountdown">
+            <span>Countdown</span>
+            <svg width="50" height="50" viewBox="0 0 50 50">
+                <polygon points="5,10 45,10 25,45" fill="red"/>
+            </svg>
+        </button>
     </div>
-    <div class="buttons">
-        <button id="start" class="start">Start</button>
-        <button id="clear" class="clear">Clear</button>
+
+    <!-- Cronómetro -->
+    <div id="stopwatch" class="hidden">
+        <div class="timer">
+            <span id="swHours">00</span>:<span id="swMinutes">00</span>:<span id="swSeconds">00</span>
+            <span id="swMillis">000</span>
+        </div>
+        <button id="swStart" class="green">Start</button>
+        <button id="swClear" class="red">Clear</button>
+        <button id="swBack" class="back">← Back</button>
     </div>
+
+    <!-- Cuenta Regresiva -->
+    <div id="countdown" class="hidden">
+        <div class="timer">
+            <span id="cdHours">00</span>:<span id="cdMinutes">00</span>:<span id="cdSeconds">00</span>
+        </div>
+        <div id="cdKeypad">
+            <button class="num" data-value="5">5</button>
+            <button class="num" data-value="6">6</button>
+            <button class="num" data-value="7">7</button>
+            <button class="num" data-value="8">8</button>
+            <button class="num" data-value="9">9</button>
+            <button id="cdSet" class="green">Set</button>
+            <button class="num" data-value="0">0</button>
+            <button class="num" data-value="1">1</button>
+            <button class="num" data-value="2">2</button>
+            <button class="num" data-value="3">3</button>
+            <button class="num" data-value="4">4</button>
+            <button id="cdClear" class="gray">Clear</button>
+        </div>
+        <button id="cdBack" class="back">← Back</button>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
