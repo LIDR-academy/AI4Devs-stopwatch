@@ -1,80 +1,91 @@
 let timer;
-let isRunning = false;
 let startTime;
 let elapsedTime = 0;
+let running = false;
+let countdownMode = false;
 
-const display = document.getElementById("display");
-const startStopBtn = document.getElementById("startStop");
-const resetBtn = document.getElementById("reset");
-const beepSound = document.getElementById("beep");
+const minutesInput = document.getElementById("minutes");
+const secondsInput = document.getElementById("seconds");
+const millisecondsInput = document.getElementById("milliseconds");
+const startButton = document.getElementById("start");
+const resetButton = document.getElementById("reset");
+const countdownButton = document.getElementById("countdown");
 
-function formatTime(ms) {
-    let totalSeconds = Math.floor(ms / 1000);
-    let hrs = Math.floor(totalSeconds / 3600);
-    let mins = Math.floor((totalSeconds % 3600) / 60);
-    let secs = totalSeconds % 60;
-    let milliseconds = ms % 1000;
-
-    return `${String(hrs).padStart(2, "0")}:${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}.${String(milliseconds).padStart(3, "0")}`;
+function updateDisplay(time) {
+    const minutes = Math.floor(time / 60000);
+    const seconds = Math.floor((time % 60000) / 1000);
+    const milliseconds = time % 1000;
+    minutesInput.value = String(minutes).padStart(2, "0");
+    secondsInput.value = String(seconds).padStart(2, "0");
+    millisecondsInput.value = String(milliseconds).padStart(3, "0");
 }
 
-// Iniciar/Detener cronómetro
-startStopBtn.addEventListener("click", function() {
-    if (isRunning) {
+function toggleTimer() {
+    if (running) {
         clearInterval(timer);
-        elapsedTime += Date.now() - startTime;
-        startStopBtn.textContent = "Start";
+        running = false;
+        startButton.textContent = "Start";
+        startButton.style.background = "#0ff";
     } else {
-        beepSound.play();
-        startTime = Date.now();
+        startTime = Date.now() - elapsedTime;
         timer = setInterval(() => {
-            let currentTime = elapsedTime + (Date.now() - startTime);
-            display.textContent = formatTime(currentTime);
+            elapsedTime = Date.now() - startTime;
+            updateDisplay(elapsedTime);
         }, 10);
-        startStopBtn.textContent = "Stop";
+        running = true;
+        startButton.textContent = "Stop";
+        startButton.style.background = "#f00";
     }
-    isRunning = !isRunning;
-});
+    resetButton.disabled = elapsedTime === 0;
+}
 
-// Reiniciar cronómetro
-resetBtn.addEventListener("click", function() {
+function resetTimer() {
     clearInterval(timer);
-    isRunning = false;
+    running = false;
     elapsedTime = 0;
-    display.textContent = "00:00:00.000";
-    startStopBtn.textContent = "Start";
-});
+    updateDisplay(elapsedTime);
+    startButton.textContent = "Start";
+    startButton.style.background = "#0ff";
+    resetButton.disabled = true;
+}
 
-// === Temporizador de Cuenta Regresiva ===
-let countdownTimer;
-let countdownRemaining = 0;
-const countdownInput = document.getElementById("countdownInput");
-const startCountdownBtn = document.getElementById("startCountdown");
-const stopCountdownBtn = document.getElementById("stopCountdown");
-const countdownDisplay = document.getElementById("countdownDisplay");
+function toggleCountdownMode() {
+    countdownMode = !countdownMode;
+    if (countdownMode) {
+        countdownButton.textContent = "Cronometer";
+        countdownButton.style.background = "#ffa500";
+        startButton.disabled = true;
+        resetButton.disabled = true;
+        minutesInput.disabled = false;
+        secondsInput.disabled = false;
+        millisecondsInput.disabled = false;
+        updateDisplay(0);
+    } else {
+        countdownButton.textContent = "Countdown";
+        countdownButton.style.background = "#ff0";
+        minutesInput.disabled = true;
+        secondsInput.disabled = true;
+        millisecondsInput.disabled = true;
+        startButton.disabled = false; // Reactivar el botón start
+        resetTimer();
+    }
+}
 
-startCountdownBtn.addEventListener("click", function() {
-    let countdownSeconds = parseInt(countdownInput.value, 10);
-    if (isNaN(countdownSeconds) || countdownSeconds <= 0) return;
-    
-    countdownRemaining = countdownSeconds * 1000;
-    countdownDisplay.textContent = formatTime(countdownRemaining);
+function enableStartButton() {
+    if (countdownMode) {
+        startButton.disabled = false;
+    }
+}
 
-    let countdownStart = Date.now();
-    countdownTimer = setInterval(() => {
-        let elapsed = Date.now() - countdownStart;
-        let timeLeft = countdownRemaining - elapsed;
+// Bloquear inputs cuando estamos en cronómetro
+minutesInput.disabled = true;
+secondsInput.disabled = true;
+millisecondsInput.disabled = true;
 
-        if (timeLeft <= 0) {
-            clearInterval(countdownTimer);
-            countdownDisplay.textContent = "00:00:00.000";
-            beepSound.play();
-        } else {
-            countdownDisplay.textContent = formatTime(timeLeft);
-        }
-    }, 10);
-});
+minutesInput.addEventListener("input", enableStartButton);
+secondsInput.addEventListener("input", enableStartButton);
+millisecondsInput.addEventListener("input", enableStartButton);
 
-stopCountdownBtn.addEventListener("click", function() {
-    clearInterval(countdownTimer);
-});
+startButton.addEventListener("click", toggleTimer);
+resetButton.addEventListener("click", resetTimer);
+countdownButton.addEventListener("click", toggleCountdownMode);

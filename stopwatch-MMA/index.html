@@ -1,34 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Timer and Countdown</title>
-<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronómetro y Cuenta Atrás</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
 </head>
 <body>
-
-<h1>Timer and Countdown</h1>
-
-<div class="timer-container">
-    <div id="display">00:00:00.000</div>
-    <div class="buttons">
-        <button id="startStop">Start</button>
-        <button id="reset">Reset</button>
+    <div class="container">
+        <div class="display">
+            <input type="number" id="minutes" min="0" max="99" value="00" disabled>:
+            <input type="number" id="seconds" min="0" max="59" value="00" disabled>:
+            <input type="number" id="milliseconds" min="0" max="999" value="000" disabled>
+        </div>
+        <div class="buttons">
+            <button id="start">Start</button>
+            <button id="reset" disabled>Restart</button>
+            <button id="countdown">Countdown</button>
+        </div>
     </div>
-</div>
-
-<h2>Countdown Timer</h2>
-<div class="timer-container">
-    <input type="number" id="countdownInput" placeholder="Enter seconds">
-    <button id="startCountdown">Start Countdown</button>
-    <button id="stopCountdown">Stop</button>
-    <div id="countdownDisplay">00:00:00.000</div>
-</div>
-
-<audio id="beep" src="beep.mp3"></audio>
-
-<script src="script.js"></script>
-
+    <script src="script.js"></script>
 </body>
 </html>
