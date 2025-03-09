@@ -3,20 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Cronómetro</title>
+    <title>Cronómetro y Temporizador</title>
     <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
 </head>
 <body>
+
     <div class="container">
-        <div class="timer">
-            <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>.<span id="milliseconds">000</span>
-        </div>
-        <div class="buttons">
-            <button id="startPauseResume" class="start">Iniciar</button>
-            <button id="reset" class="clear">Limpiar</button>
-        </div>
+        <nav class="tabs">
+            <button id="tab-cronometro" class="active">Cronómetro</button>
+            <button id="tab-temporizador">Temporizador</button>
+        </nav>
+
+        <section id="cronometro" class="content active">
+            <h1>Cronómetro</h1>
+            <div id="cronometro-display">00:00:00.000</div>
+            <div class="buttons">
+                <button id="start-pause">Iniciar</button>
+                <button id="reset">Limpiar</button>
+                <button id="lap">Vuelta</button>
+            </div>
+            <ul id="laps"></ul>
+        </section>
+
+        <section id="temporizador" class="content">
+            <h1>Temporizador</h1>
+            <div id="temporizador-display">00:00:00.000</div>
+            <div class="num-pad">
+                <button class="num" data-num="1">1</button>
+                <button class="num" data-num="2">2</button>
+                <button class="num" data-num="3">3</button>
+                <button class="num" data-num="4">4</button>
+                <button class="num" data-num="5">5</button>
+                <button class="num" data-num="6">6</button>
+                <button class="num" data-num="7">7</button>
+                <button class="num" data-num="8">8</button>
+                <button class="num" data-num="9">9</button>
+                <button class="num" data-num="0">0</button>
+                <button id="set-time">Establecer</button>
+                <button id="clear-time">Limpiar</button>
+            </div>
+            <div class="buttons">
+                <button id="start-pause-timer">Iniciar</button>
+            </div>
+        </section>
     </div>
-    <script src="script.js"></script>
+
+    <audio id="alarm-sound" src="https://www.soundjay.com/buttons/button-3.mp3"></audio>
+
 </body>
 </html>
