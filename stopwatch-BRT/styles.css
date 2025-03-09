@@ -1,94 +1,133 @@
-/* Estilos generales */
+/* Estilo base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Courier New', monospace;
+}
+
 body {
-    font-family: Arial, sans-serif;
+    background-color: #000;
+    color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f8f9fa;
-    margin: 0;
 }
 
+/* Contenedor Principal */
 .container {
-    text-align: center;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     width: 90%;
     max-width: 400px;
+    text-align: center;
 }
 
-/* Estilos del cronómetro */
-.timer {
-    font-size: 3rem;
-    font-weight: bold;
-    font-family: monospace; /* Se establece la fuente monospace para evitar cambios de tamaño */
-    background: #e9ecef;
-    padding: 15px;
-    border-radius: 10px;
+/* Pestañas de navegación */
+.tabs {
+    display: flex;
+    justify-content: space-around;
     margin-bottom: 20px;
 }
 
-/* Estilos de los botones */
-.buttons {
-    display: flex;
-    justify-content: space-between;
+.tabs button {
+    flex: 1;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #16181c;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: 0.3s;
 }
 
-button {
-    font-size: 1.2rem;
-    padding: 10px 20px;
+.tabs button.active {
+    border-bottom: 3px solid #1d9bf0;
+}
+
+/* Secciones de Cronómetro y Temporizador */
+.content {
+    display: none;
+}
+
+.content.active {
+    display: block;
+}
+
+/* Display del Cronómetro y Temporizador */
+#cronometro-display, #temporizador-display {
+    font-size: 40px;
+    background: #16181c;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #1d9bf0;
+}
+
+/* Botones principales */
+.buttons button, .num-pad button {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
     border: none;
     border-radius: 5px;
+    margin: 5px 0;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: 0.3s;
 }
 
-.start {
-    background: #28a745;
-    color: white;
+#start-pause, #start-pause-timer {
+    background: #1d9bf0;
+    color: #fff;
 }
 
-.start:hover {
-    background: #218838;
+#reset, #clear-time {
+    background: #ff4c4c;
+    color: #fff;
 }
 
-.pause {
-    background: #ffc107;
-    color: black;
+#lap {
+    background: #17c964;
+    color: #fff;
 }
 
-.pause:hover {
-    background: #e0a800;
+/* Botón en estado de pausa */
+.paused {
+    background: yellow !important;
+    color: black !important;
 }
 
-.resume {
-    background: #007bff;
-    color: white;
+/* Botón en estado de reanudar */
+.resumed {
+    background: blue !important;
+    color: white !important;
 }
 
-.resume:hover {
-    background: #0056b3;
+/* Teclado numérico del temporizador */
+.num-pad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    margin-bottom: 20px;
 }
 
-.clear {
-    background: #dc3545;
-    color: white;
+.num-pad button {
+    background: #333;
+    color: #fff;
 }
 
-.clear:hover {
-    background: #c82333;
+/* Lista de vueltas */
+#laps {
+    list-style: none;
+    margin-top: 10px;
 }
 
-/* Diseño responsivo */
-@media (max-width: 600px) {
-    .timer {
-        font-size: 2.5rem;
-    }
-    
-    button {
-        font-size: 1rem;
-        padding: 8px 15px;
-    }
+#laps li {
+    background: #16181c;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px 0;
+    border-left: 3px solid #1d9bf0;
 }
