@@ -1,48 +1,82 @@
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #f4f4f4;
-}
-
-.timer-container {
-    margin: 20px auto;
-    padding: 20px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 350px;
-}
-
-#display, #countdownDisplay {
-    font-size: 2em;
-    font-weight: bold;
-    padding: 10px;
-    background: lightblue;
-    border-radius: 5px;
-    margin: 10px auto;
-    width: 90%;
-}
-
-.buttons {
+    background-color: #0d0d0d;
+    font-family: 'Orbitron', sans-serif;
+    color: #0ff;
     display: flex;
     justify-content: center;
-    gap: 10px;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+    border: 3px solid #0ff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #0ff;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.display {
+    font-size: 3em;
+    padding: 10px;
+    background: #111;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #0ff;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 350px;
+    margin: 0 auto 20px auto;
+}
+
+input {
+    font-size: 1.2em;
+    width: 60px;
+    text-align: center;
+    background: black;
+    border: none;
+    color: #0ff;
+    margin: 0 5px;
 }
 
 button {
-    padding: 10px 20px;
-    font-size: 1em;
+    background: #0ff;
     border: none;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #000;
     cursor: pointer;
+    margin: 5px;
     border-radius: 5px;
+    text-transform: uppercase;
+    box-shadow: 0 0 10px #0ff;
+    transition: 0.3s;
 }
 
-#startStop, #startCountdown {
-    background: limegreen;
-    color: white;
+button:hover {
+    background: #00cccc;
+    box-shadow: 0 0 15px #00cccc;
 }
 
-#reset, #stopCountdown {
-    background: red;
-    color: white;
+button:active {
+    transform: scale(0.95);
+}
+
+#reset:disabled, #start:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+#countdown {
+    background: #ff0;
+    box-shadow: 0 0 10px #ff0;
+}
+
+#countdown.active {
+    background: #ffa500;
+    box-shadow: 0 0 10px #ffa500;
 }
